@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我们 — 峯境园林</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+  <style>
+    .site-header { background: var(--color-bg); }
+    .site-header .nav-link { color: var(--color-text-primary); opacity: 0.85; }
+    .site-header .nav-link::after { background: var(--color-text-primary); }
+    .site-header .header-logo { color: var(--color-text-primary) !important; }
+    .site-header #mobile-menu-toggle { color: var(--color-text-primary); }
+
+    .designer-portrait {
+      width: 60%;
+      margin: 0 auto;
+      border: 1px solid var(--color-border);
+    }
+    .designer-portrait img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(20%) sepia(5%);
+      opacity: 0.92;
+    }
+
+    .timeline {
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-12);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-10);
+    }
+    .timeline li {
+      display: flex;
+      gap: var(--space-8);
+      align-items: flex-start;
+    }
+    .timeline .year {
+      font-family: 'Noto Serif SC', serif;
+      font-size: var(--text-base);
+      font-weight: var(--weight-semibold);
+      color: var(--color-text-accent);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      width: 96px;
+      text-align: center;
+      padding-top: 2px;
+    }
+    .timeline .content {
+      flex: 1;
+      min-width: 0;
+    }
+    .timeline .content p {
+      font-family: var(--font-cn);
+      font-size: 20px;
+      font-weight: var(--weight-regular);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text-primary);
+      margin: 0;
+    }
+
+    @media (max-width: 767px) {
+      .designer-portrait { width: 100%; }
+      .timeline li { flex-direction: column; gap: var(--space-3); }
+      .timeline .year { width: auto; text-align: left; }
+    }
+  </style>
+</head>
+<body class="min-h-screen font-cn antialiased">
+  <main>
+    <!-- SITE HEADER -->
+    <header class="site-header" id="site-header">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-6) var(--space-8);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <a href="index.html" class="header-logo" data-i18n="brand-name" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-regular); color: var(--color-text-primary); text-decoration: none; letter-spacing: var(--tracking-wide);">峯境园林</a>
+
+          <nav style="display: flex; align-items: center; gap: var(--space-8);">
+            <a href="index.html" class="nav-link" data-nav-key="index" data-i18n="nav-home">首页</a>
+            <a href="projects.html" class="nav-link" data-nav-key="projects" data-i18n="nav-projects">漫游此园</a>
+            <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-i18n="nav-philosophy">园之生长</a>
+            <a href="about.html" class="nav-link" data-nav-key="about" data-active="true" data-i18n="nav-about">关于我们</a>
+            <div class="lang-selector" style="display: flex; gap: var(--space-2); margin-left: var(--space-6); align-items: center;">
+              <button class="lang-option active" data-lang="zh-CN" onclick="I18N.setLang('zh-CN')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">简</button>
+              <button class="lang-option" data-lang="zh-TW" onclick="I18N.setLang('zh-TW')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">繁</button>
+              <button class="lang-option" data-lang="en" onclick="I18N.setLang('en')" style="background: none; border: none; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">EN</button>
+            </div>
+          </nav>
+
+          <button id="mobile-menu-toggle" aria-label="菜单" style="display: none; background: none; border: none; cursor: pointer; color: var(--color-text-primary); padding: var(--space-2);">
+            <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" style="display: none; padding: var(--space-6) var(--space-8) var(--space-8); border-top: 1px solid var(--color-border);">
+        <nav style="display: flex; flex-direction: column; gap: var(--space-6);">
+          <a href="index.html" class="nav-link" data-nav-key="index" data-i18n="nav-home">首页</a>
+          <a href="projects.html" class="nav-link" data-nav-key="projects" data-i18n="nav-projects">漫游此园</a>
+          <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-i18n="nav-philosophy">园之生长</a>
+          <a href="about.html" class="nav-link" data-nav-key="about" data-active="true" data-i18n="nav-about">关于我们</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <div id="page-content" class="min-h-screen" style="padding-top: var(--space-20);">
+      <!-- Page Title Banner -->
+      <section class="page-banner">
+        <img src="assets/images/image_0_2gus5p.png" alt="" aria-hidden="true">
+        <div class="banner-content fade-in">
+          <h1 data-i18n="nav-about">关于我们</h1>
+        </div>
+      </section>
+
+      <!-- Designer Portrait -->
+      <section class="fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-32) var(--space-8) 0;">
+        <div class="designer-portrait">
+          <img src="assets/images/image_41_5tuob8.png" alt="设计师云山肖像">
+        </div>
+      </section>
+
+      <!-- Biographical Text -->
+      <section class="fade-in" style="max-width: 640px; margin: 0 auto; padding: var(--space-16) var(--space-8) var(--space-24);">
+        <h1 data-i18n="about-heading" style="font-family: var(--font-cn); font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: var(--weight-regular); line-height: var(--leading-snug); letter-spacing: var(--tracking-wide); color: var(--color-text-primary); text-align: center; text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">李华根</h1>
+        <p style="font-family: var(--font-cn); font-size: var(--text-xs); font-weight: var(--weight-light); letter-spacing: var(--tracking-wider); color: var(--color-text-tertiary); text-align: center; margin: var(--space-3) 0 0;" data-i18n="designer-tag">园林设计师</p>
+        <p data-i18n="about-years-text" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); line-height: var(--leading-relaxed); color: var(--color-text-secondary); text-align: center; margin-top: var(--space-6); letter-spacing: var(--tracking-wide);">
+          二十八年潜心于中国古典岭南园林之研究与营造
+        </p>
+        <p data-i18n="about-bio-text" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-regular); line-height: 2; margin-top: var(--space-10); text-indent: 2em; color: #020202;">
+          一九八九年毕业于广东省建筑工程学院，师从多位园艺师和工匠，长期沉浸于广东岭南园林的现场施工、修复、研究。致力于将古典造园智慧融入当代私家园林营造，将传统材料及工艺与现代材料技术巧妙结合，为海内外藏家、建筑师及高净值私宅业精心设计打造专属的中式岭南园林空间，传承专属的文脉家园。
+        </p>
+      </section>
+
+      <!-- Credentials Timeline -->
+      <section class="fade-in" style="max-width: 640px; margin: 0 auto; padding: 0 var(--space-8) var(--space-32);">
+        <ul class="timeline">
+          <li>
+            <span class="year" data-i18n="timeline-1-year">1998年以来</span>
+            <div class="content">
+              <p data-i18n="timeline-1">东莞、肇庆、广州、顺德、重庆、北京、昆明、贵阳、遵义、宜春等地多个私家庭院设计及施工</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2014</span>
+            <div class="content">
+              <p data-i18n="timeline-2">成立财神园林设计工作室</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2019-2024</span>
+            <div class="content">
+              <p data-i18n="timeline-3">广州增城荔仙园项目</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2023</span>
+            <div class="content">
+              <p data-i18n="timeline-4">成为中国古建筑园林艺术协会成员</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2023</span>
+            <div class="content">
+              <p data-i18n="timeline-5">中国文化遗产大会发表岭南园林新论（论文）</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2024</span>
+            <div class="content">
+              <p data-i18n="timeline-6">参与广州城中村改造多个祠堂修缮工程设计</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2025</span>
+            <div class="content">
+              <p data-i18n="timeline-7">参与广州陈家祠古建筑修缮工程研学</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2025</span>
+            <div class="content">
+              <p data-i18n="timeline-8">成立峯境园林规划设计公司</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+      <div class="fade-in">
+        <p data-i18n="contact-intro">若您有意打造传世的中式园林，欢迎通过邮箱与我们取得联系</p>
+        <div class="divider"></div>
+        <a href="mailto:fjinggarden@outlook.com">fjinggarden@outlook.com</a>
+      </div>
+    </section>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-20) var(--space-8) var(--space-12); border-top: 1px solid var(--color-border);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);">
+          <span data-i18n="brand-name" style="font-family: var(--font-cn); font-size: var(--text-sm); font-weight: var(--weight-regular); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide);">峯境园林</span>
+          <span data-i18n="footer-copyright">© 峯境景观规划设计有限公司 版权所有</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/i18n.js"></script>
+</body>
+</html>

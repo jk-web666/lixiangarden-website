@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>峯境园林 — 荔仙园</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+</head>
+<body class="min-h-screen antialiased">
+  <main>
+    <!-- SITE HEADER -->
+    <header class="site-header" id="site-header">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-6) var(--space-8);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <a href="index.html" class="header-logo" data-i18n="brand-name" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-regular); color: var(--color-text-inverse); text-decoration: none; letter-spacing: var(--tracking-wide); transition: color var(--transition-elegant);">峯境园林</a>
+
+          <nav style="display: flex; align-items: center; gap: var(--space-8);">
+            <a href="index.html" class="nav-link" data-nav-key="index" data-active="true" data-i18n="nav-home">首页</a>
+            <a href="projects.html" class="nav-link" data-nav-key="projects" data-i18n="nav-projects">漫游此园</a>
+            <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-i18n="nav-philosophy">园之生长</a>
+            <a href="about.html" class="nav-link" data-nav-key="about" data-i18n="nav-about">关于我们</a>
+            <div class="lang-selector" style="display: flex; gap: var(--space-2); margin-left: var(--space-6); align-items: center;">
+              <button class="lang-option active" data-lang="zh-CN" onclick="I18N.setLang('zh-CN')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">简</button>
+              <button class="lang-option" data-lang="zh-TW" onclick="I18N.setLang('zh-TW')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">繁</button>
+              <button class="lang-option" data-lang="en" onclick="I18N.setLang('en')" style="background: none; border: none; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">EN</button>
+            </div>
+          </nav>
+
+          <button id="mobile-menu-toggle" aria-label="菜单" style="display: none; background: none; border: none; cursor: pointer; color: var(--color-text-inverse); padding: var(--space-2);">
+            <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" style="display: none; padding: var(--space-6) var(--space-8) var(--space-8); border-top: 1px solid rgba(247, 244, 240, 0.2);">
+        <nav style="display: flex; flex-direction: column; gap: var(--space-6);">
+          <a href="index.html" class="nav-link" data-nav-key="index" data-active="true" data-i18n="nav-home">首页</a>
+          <a href="projects.html" class="nav-link" data-nav-key="projects" data-i18n="nav-projects">漫游此园</a>
+          <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-i18n="nav-philosophy">园之生长</a>
+          <a href="about.html" class="nav-link" data-nav-key="about" data-i18n="nav-about">关于我们</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO FULLSCREEN -->
+    <section class="hero-fullscreen" aria-label="品牌主视觉">
+      <div class="hero-bg">
+        <img src="assets/images/image_0_2gus5p.png" alt="月色下的中式古典园林夜景">
+      </div>
+      <div class="hero-gradient"></div>
+
+      <div class="hero-content fade-in">
+        <h1 class="hero-brand" data-i18n="hero-brand">荔仙园</h1>
+        <div class="hero-rule" role="separator"></div>
+        <p class="hero-tagline" data-i18n="hero-tagline">岭南山地园林，博古烁今，雍容典雅。<br>因山就势，层脊叠檐，古木森森，流水潺潺。<br>曲径通幽，步移景换，精雕细琢，巧夺天工。<br>其峥嵘格局与周边五叠岭的万亩古荔林<br>及巍峨山势融为一体，<br>给人以源远流长、气象万千之感。</p>
+      </div>
+
+      <a href="#featured" class="hero-scroll-indicator" aria-hidden="true" style="text-decoration: none; color: inherit;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </a>
+    </section>
+
+    <!-- FEATURED PROJECT TEASER -->
+    <section id="featured" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-32) var(--space-8);">
+      <div class="featured-teaser fade-in" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center;">
+        <div class="teaser-image" style="aspect-ratio: 4 / 3;">
+          <img src="assets/images/image_1_jmwitv.png" alt="荔仙园园林实景">
+        </div>
+        <div>
+          <span data-i18n="featured-tag" style="font-family: var(--font-body); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide);">项目概览</span>
+          <h2 data-i18n="featured-title" style="font-family: var(--font-cn); font-size: var(--text-3xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: var(--space-4) 0 var(--space-6); text-wrap: balance; word-break: keep-all;">每座园林，皆为天地与人心之间的一次对话</h2>
+          <p data-i18n="featured-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0 0 var(--space-8);">岭南山地园林之典范，因山就势，博古烁今。五叠岭下，万亩荔林相拥，藏一方传世之园。</p>
+          <a href="projects.html" class="teaser-link">
+            <span data-i18n="nav-projects">漫游此园</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY TEASER -->
+    <section style="background: var(--color-bg-subtle); padding: var(--space-32) var(--space-8);">
+      <div style="max-width: var(--max-width-page); margin: 0 auto;">
+        <div class="featured-teaser fade-in" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: center;">
+          <div style="order: 2;">
+            <span style="font-family: var(--font-body); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide);" data-i18n="philosophy-teaser-tag">造园过程</span>
+            <h2 data-i18n="philosophy-teaser-title" style="font-family: var(--font-cn); font-size: var(--text-3xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: var(--space-4) 0 var(--space-6); text-wrap: balance; word-break: keep-all;">一座园子，不是建成的，是长成的</h2>
+            <p data-i18n="philosophy-teaser-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0 0 var(--space-8);">从第一铲土落下，到枝叶交叠成荫，时间在这里缓慢地做着它自己的事。石头住下来，苔藓爬上来，树木学会了风的语言。</p>
+            <a href="philosophy.html" class="teaser-link">
+              <span data-i18n="nav-philosophy">园之生长</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+          <div class="teaser-image" style="aspect-ratio: 4 / 3; order: 1;">
+            <img src="assets/images/image_16_o9tsff.jpg" alt="园林生长过程">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+      <div class="fade-in">
+        <p data-i18n="contact-intro">若您有意打造传世的中式园林，欢迎通过邮箱与我们取得联系</p>
+        <div class="divider"></div>
+        <a href="mailto:fjinggarden@outlook.com">fjinggarden@outlook.com</a>
+      </div>
+    </section>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-20) var(--space-8) var(--space-12); border-top: 1px solid var(--color-border);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);">
+          <span data-i18n="brand-name" style="font-family: var(--font-cn); font-size: var(--text-sm); font-weight: var(--weight-regular); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide);">峯境园林</span>
+          <span data-i18n="footer-copyright">© 峯境景观规划设计有限公司 版权所有</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <style id="theme-vars">
+/* =====================================================
+   Brand Design Tokens — Chinese Garden Studio
+   Tone: Luxury/refined editorial, museum-like stillness
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+:root {
+  /* ── Color System ── */
+  /* Primary: deep ink black inspired by Chinese calligraphy ink */
+  --color-primary: #1a1714;
+  --color-primary-light: #2c2723;
+  --color-primary-lighter: #4a433c;
+  --color-primary-dark: #0d0b09;
+  --color-primary-50: rgba(26, 23, 20, 0.05);
+  --color-primary-100: rgba(26, 23, 20, 0.1);
+  --color-primary-200: rgba(26, 23, 20, 0.2);
+  --color-primary-300: rgba(26, 23, 20, 0.3);
+
+  /* Background palette: warm parchment tones */
+  --color-bg: #f7f4f0;
+  --color-bg-subtle: #f0ebe4;
+  --color-bg-muted: #e8e2d9;
+  --color-bg-elevated: #ffffff;
+  --color-bg-overlay: rgba(247, 244, 240, 0.92);
+
+  /* Text on light backgrounds */
+  --color-text-primary: #1a1714;
+  --color-text-secondary: #5c544b;
+  --color-text-tertiary: #8a8078;
+  --color-text-inverse: #f7f4f0;
+  --color-text-accent: #8b7355;
+
+  /* Border system: warm, nearly invisible */
+  --color-border: #d9d2c7;
+  --color-border-subtle: #ebe6de;
+  --color-border-strong: #a39889;
+
+  /* State colors (semantic only) */
+  --state-success: #5a7a5e;
+  --state-warning: #b8944a;
+  --state-error: #9e4a4a;
+  --state-info: #5a7a8b;
+
+  /* ── Typography ── */
+  --font-display: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+  --font-body: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+  --font-cn: 'Noto Serif SC', 'SimSun', 'STSong', serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+  --text-4xl: 3.5rem;
+  --text-5xl: 4.5rem;
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+  --leading-loose: 2.0;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.16em;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+  --space-48: 12rem;
+
+  /* ── Shape (Restrained) ── */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* ── Surface & Depth ── */
+  /* Static surfaces use border-first; shadow alpha <= 0.05 */
+  --shadow-subtle: 0 1px 3px rgba(26, 23, 20, 0.03);
+  --shadow-elevated: 0 4px 12px rgba(26, 23, 20, 0.05);
+  --shadow-float: 0 12px 40px rgba(26, 23, 20, 0.12);
+
+  /* ── Transitions ── */
+  --transition-fast: 200ms ease;
+  --transition-base: 350ms ease;
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-elegant: 800ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── Layout ── */
+  --max-width-page: 1400px;
+  --max-width-content: 960px;
+  --max-width-narrow: 720px;
+}
+
+/* Dark mode (for night-view gallery sections) */
+.dark, [data-theme="dark"] {
+  --color-bg: #12110f;
+  --color-bg-subtle: #1a1714;
+  --color-bg-muted: #242019;
+  --color-bg-elevated: #1e1b17;
+  --color-bg-overlay: rgba(18, 17, 15, 0.92);
+
+  --color-text-primary: #f0ebe4;
+  --color-text-secondary: #a39889;
+  --color-text-tertiary: #6b6157;
+  --color-text-inverse: #1a1714;
+  --color-text-accent: #c4a87a;
+
+  --color-border: #2c2723;
+  --color-border-subtle: #242019;
+  --color-border-strong: #4a433c;
+}
+
+/* ── Typography Classes ── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-cn {
+  font-family: var(--font-cn);
+}
+
+.text-serif {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-tight);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-background); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+
+      /* ── Project Shell: Site Header ── */
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: transparent;
+        transition: background var(--transition-elegant), color var(--transition-elegant);
+        font-family: var(--font-cn);
+      }
+      .site-header.scrolled {
+        background: var(--color-bg);
+      }
+      .site-header .nav-link {
+        font-size: var(--text-sm);
+        font-weight: 600;
+        letter-spacing: var(--tracking-wide);
+        color: var(--color-text-inverse);
+        opacity: 0.7;
+        transition: opacity var(--transition-fast);
+        position: relative;
+        padding-bottom: var(--space-1);
+        text-decoration: none;
+      }
+      .site-header .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--color-text-inverse);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform var(--transition-base);
+      }
+      .site-header .nav-link:hover {
+        opacity: 1;
+      }
+      .site-header .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+      .site-header .nav-link[data-active="true"] {
+        opacity: 1;
+      }
+      .site-header .nav-link[data-active="true"]::after {
+        transform: scaleX(1);
+      }
+      /* When header is scrolled, switch nav to dark text */
+      .site-header.scrolled .nav-link {
+        color: var(--color-text-primary);
+      }
+      .site-header.scrolled .nav-link::after {
+        background: var(--color-text-primary);
+      }
+      .site-header.scrolled .header-logo {
+        color: var(--color-text-primary) !important;
+      }
+
+      /* ── Project Shell: Site Footer ── */
+      .site-footer {
+        font-family: var(--font-cn);
+        font-size: var(--text-xs);
+        color: var(--color-text-tertiary);
+      }
+
+      /* ── Hero Section ── */
+      .hero-fullscreen {
+        position: relative;
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-color: var(--color-primary-dark);
+      }
+      .hero-fullscreen .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .hero-fullscreen .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.85;
+      }
+      .hero-fullscreen .hero-gradient {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          to bottom,
+          rgba(13, 11, 9, 0.1) 0%,
+          rgba(13, 11, 9, 0.0) 40%,
+          rgba(13, 11, 9, 0.3) 70%,
+          rgba(247, 244, 240, 0.95) 100%
+        );
+      }
+      .hero-fullscreen .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: var(--space-8);
+      }
+      .hero-fullscreen .hero-brand {
+        font-family: var(--font-cn);
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: var(--weight-medium);
+        color: #ffffff;
+        letter-spacing: var(--tracking-wider);
+        text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6), 0 0 60px rgba(0, 0, 0, 0.3);
+        text-wrap: balance;
+        word-break: keep-all;
+      }
+      .hero-fullscreen .hero-rule {
+        width: 48px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.6);
+        margin: var(--space-6) auto;
+      }
+      .hero-fullscreen .hero-tagline {
+        font-family: var(--font-cn);
+        font-size: clamp(1rem, 2vw, 1.375rem);
+        font-weight: var(--weight-regular);
+        color: rgba(255, 255, 255, 0.92);
+        letter-spacing: 0.06em;
+        line-height: 2;
+        text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.2);
+      }
+      .hero-scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        opacity: 0.5;
+        animation: hero-scroll-bob 2.4s ease-in-out infinite;
+      }
+      .hero-scroll-indicator svg {
+        stroke: var(--color-text-primary);
+      }
+      @keyframes hero-scroll-bob {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(8px); }
+      }
+
+      /* ── Featured Project Teaser ── */
+      .featured-teaser {
+        transition: opacity var(--transition-slow);
+      }
+      .featured-teaser .teaser-image {
+        overflow: hidden;
+        position: relative;
+      }
+      .featured-teaser .teaser-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-elegant);
+      }
+      .featured-teaser:hover .teaser-image img {
+        transform: scale(1.02);
+      }
+      .featured-teaser .teaser-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-family: var(--font-cn);
+        font-size: var(--text-sm);
+        font-weight: var(--weight-regular);
+        color: var(--color-text-primary);
+        text-decoration: none;
+        letter-spacing: var(--tracking-wide);
+        opacity: 0.7;
+        transition: opacity var(--transition-fast);
+        padding-bottom: var(--space-1);
+        position: relative;
+      }
+      .featured-teaser .teaser-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--color-text-primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform var(--transition-base);
+      }
+      .featured-teaser .teaser-link:hover {
+        opacity: 1;
+      }
+      .featured-teaser .teaser-link:hover::after {
+        transform: scaleX(1);
+      }
+      .featured-teaser .teaser-link svg {
+        transition: transform var(--transition-base);
+      }
+      .featured-teaser .teaser-link:hover svg {
+        transform: translateX(3px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-scroll-indicator { animation: none; }
+        .hero-fullscreen .hero-gradient { transition: none; }
+        .featured-teaser .teaser-image img { transition: none; }
+        .featured-teaser .teaser-link::after { transition: none; }
+      }
+
+      @media (max-width: 767px) {
+        .hero-fullscreen .hero-brand {
+          font-size: clamp(2rem, 8vw, 3rem);
+        }
+        .hero-fullscreen .hero-tagline {
+          font-size: var(--text-base);
+        }
+        body { font-size: 14px; }
+        [style*="font-size: 20px"] { font-size: 17px !important; }
+        [style*="font-size: var(--text-2xl)"] { font-size: var(--text-xl) !important; }
+        [style*="font-size: var(--text-3xl)"] { font-size: var(--text-2xl) !important; }
+        [style*="font-size: var(--text-4xl)"] { font-size: var(--text-3xl) !important; }
+      }
+
+      .lang-option.active { opacity: 1 !important; color: var(--color-text-primary) !important; }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+
+    <!-- ══════════════════════════════════════════════
+         SITE HEADER
+         ══════════════════════════════════════════════ -->
+    <header class="site-header" id="site-header">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-6) var(--space-8);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <!-- Logo -->
+          <a href="#" class="header-logo" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-regular); color: var(--color-text-inverse); text-decoration: none; letter-spacing: var(--tracking-wide); transition: color var(--transition-elegant);">峯境园林</a>
+
+          <!-- Desktop Navigation -->
+          <nav style="display: flex; align-items: center; gap: var(--space-8);">
+            <a href="#" class="nav-link" data-nav-key="index"    data-dom-id="nav-index"    data-active="true" data-i18n="nav-home">首页</a>
+            <a href="#" class="nav-link" data-nav-key="projects" data-dom-id="nav-projects" data-i18n="nav-projects">漫游此园</a>
+            <a href="#" class="nav-link" data-nav-key="philosophy" data-dom-id="nav-philosophy" data-i18n="nav-philosophy">园之生长</a>
+            <a href="#" class="nav-link" data-nav-key="about"    data-dom-id="nav-about"    data-i18n="nav-about">关于我们</a>
+            <a href="#" class="nav-link" data-nav-key="contact"  data-dom-id="nav-contact"  data-i18n="nav-contact">联系我们</a>
+            <div class="lang-selector" style="display: flex; gap: var(--space-2); margin-left: var(--space-6); align-items: center;">
+              <button class="lang-option" data-lang="zh-CN" onclick="I18N.setLang('zh-CN')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">简</button>
+              <button class="lang-option" data-lang="zh-TW" onclick="I18N.setLang('zh-TW')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">繁</button>
+              <button class="lang-option" data-lang="en" onclick="I18N.setLang('en')" style="background: none; border: none; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">EN</button>
+            </div>
+          </nav>
+
+          <!-- Mobile Hamburger (hidden on desktop) -->
+          <button id="mobile-menu-toggle" aria-label="菜单" style="display: none; background: none; border: none; cursor: pointer; color: var(--color-text-inverse); padding: var(--space-2);">
+            <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Panel -->
+      <div id="mobile-menu" style="display: none; padding: var(--space-6) var(--space-8) var(--space-8); border-top: 1px solid rgba(247, 244, 240, 0.2);">
+        <nav style="display: flex; flex-direction: column; gap: var(--space-6);">
+          <a href="#" class="nav-link" data-nav-key="index"    data-dom-id="nav-index"    data-active="true" data-i18n="nav-home">首页</a>
+          <a href="#" class="nav-link" data-nav-key="projects" data-dom-id="nav-projects" data-i18n="nav-projects">漫游此园</a>
+          <a href="#" class="nav-link" data-nav-key="philosophy" data-dom-id="nav-philosophy" data-i18n="nav-philosophy">园之生长</a>
+          <a href="#" class="nav-link" data-nav-key="about"    data-dom-id="nav-about"    data-i18n="nav-about">关于我们</a>
+          <a href="#" class="nav-link" data-nav-key="contact"  data-dom-id="nav-contact"  data-i18n="nav-contact">联系我们</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════
+         HERO FULLSCREEN — Night Garden
+         ══════════════════════════════════════════════ -->
+    <section class="hero-fullscreen" aria-label="品牌主视觉">
+      <div class="hero-bg">
+        <img src="../assets/image_0_2gus5p.png" alt="月色下的中式古典园林夜景" >
+      </div>
+      <div class="hero-gradient"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-brand" data-i18n="hero-brand">荔仙园</h1>
+        <div class="hero-rule" role="separator"></div>
+        <p class="hero-tagline" data-i18n="hero-tagline">岭南山地园林，博古烁今，雍容典雅。<br>因山就势，层脊叠檐，古木森森，流水潺潺。<br>曲径通幽，步移景换，精雕细琢，巧夺天工。<br>其峥嵘格局与周边五叠岭的万亩古荔林<br>及巍峨山势融为一体，<br>给人以源远流长、气象万千之感。</p>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         FEATURED PROJECT TEASER
+         ══════════════════════════════════════════════ -->
+    
+
+    <!-- ══════════════════════════════════════════════
+         PAGE CONTENT WRAPPER (for below-fold spacing)
+         ══════════════════════════════════════════════ -->
+    
+
+    <!-- ══════════════════════════════════════════════
+         SITE FOOTER
+         ══════════════════════════════════════════════ -->
+    <footer class="site-footer">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-20) var(--space-8) var(--space-12); border-top: 1px solid var(--color-border);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);">
+          <span style="font-family: var(--font-cn); font-size: var(--text-sm); font-weight: var(--weight-regular); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide);">
+            峯境园林
+          </span>
+          <span data-i18n="footer-copyright">
+            &copy; 峯境景观规划设计有限公司 版权所有
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    </main>
+
+    <!-- Inline scroll-detection for header background (no external JS) -->
+    <script>
+    (function () {
+      var header = document.getElementById('site-header');
+      if (!header) return;
+      var toggle = document.getElementById('mobile-menu-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+
+      // Scroll detection — transparent -> solid background
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 20) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      // Mobile menu toggle (hamburger)
+      if (toggle && mobileMenu) {
+        toggle.addEventListener('click', function () {
+          var isOpen = mobileMenu.style.display === 'block';
+          mobileMenu.style.display = isOpen ? 'none' : 'block';
+          toggle.setAttribute('aria-expanded', String(!isOpen));
+        });
+      }
+
+      // Responsive: show hamburger on small screens
+      function checkMobile() {
+        if (toggle && mobileMenu) {
+          var isMobile = window.innerWidth < 768;
+          toggle.style.display = isMobile ? 'block' : 'none';
+          if (!isMobile) {
+            mobileMenu.style.display = 'none';
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        }
+      }
+      window.addEventListener('resize', checkMobile);
+      checkMobile();
+    })();
+    </script>
+    <script>lucide.createIcons();</script>
+    <script src="../assets/i18n.js"></script>
+    <script src="../assets/router.js"></script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>园之生长 — 峯境园林</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+  <style>
+    .site-header { background: var(--color-bg); }
+    .site-header .nav-link { color: var(--color-text-primary); opacity: 0.85; }
+    .site-header .nav-link::after { background: var(--color-text-primary); }
+    .site-header .header-logo { color: var(--color-text-primary) !important; }
+    .site-header #mobile-menu-toggle { color: var(--color-text-primary); }
+
+    .craft-section { position: relative; margin-bottom: var(--space-12); padding-bottom: var(--space-20); }
+    .craft-section::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 2px;
+      background: rgba(74, 103, 65, 0.3);
+    }
+    .craft-section:last-child { margin-bottom: 0; padding-bottom: 0; }
+    .craft-section:last-child::after { display: none; }
+    .craft-title-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-10);
+    }
+    .craft-title {
+      font-family: var(--font-cn);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-medium);
+      color: #4a6741;
+      letter-spacing: 0.2em;
+      margin: 0;
+      padding: var(--space-3) var(--space-10);
+      border: 1px solid rgba(74,103,65,0.25);
+      background: linear-gradient(135deg, rgba(244,236,218,0.45) 0%, rgba(235,225,200,0.35) 100%);
+      position: relative;
+    }
+    .craft-desc {
+      font-family: var(--font-cn);
+      font-size: 20px;
+      font-weight: var(--weight-regular);
+      color: var(--color-text-primary);
+      line-height: 2.2;
+      text-align: center;
+      margin: 0 auto var(--space-10);
+      max-width: var(--max-width-narrow);
+    }
+
+    .hairline-divider {
+      max-width: var(--max-width-narrow);
+      margin: 0 auto var(--space-12);
+      padding: 0 var(--space-8);
+    }
+    .intro-figure {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-subtle);
+    }
+    .intro-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .intro-img:hover {
+      transform: scale(1.05);
+    }
+    .hairline-divider hr {
+      border: none;
+      border-top: 1px solid var(--color-border-subtle);
+      margin: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-cn antialiased">
+  <main>
+    <!-- SITE HEADER -->
+    <header class="site-header" id="site-header">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-6) var(--space-8);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <a href="index.html" class="header-logo" data-i18n="brand-name" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-regular); color: var(--color-text-primary); text-decoration: none; letter-spacing: var(--tracking-wide);">峯境园林</a>
+
+          <nav style="display: flex; align-items: center; gap: var(--space-8);">
+            <a href="index.html" class="nav-link" data-nav-key="index" data-i18n="nav-home">首页</a>
+            <a href="projects.html" class="nav-link" data-nav-key="projects" data-i18n="nav-projects">漫游此园</a>
+            <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-active="true" data-i18n="nav-philosophy">园之生长</a>
+            <a href="about.html" class="nav-link" data-nav-key="about" data-i18n="nav-about">关于我们</a>
+            <div class="lang-selector" style="display: flex; gap: var(--space-2); margin-left: var(--space-6); align-items: center;">
+              <button class="lang-option active" data-lang="zh-CN" onclick="I18N.setLang('zh-CN')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">简</button>
+              <button class="lang-option" data-lang="zh-TW" onclick="I18N.setLang('zh-TW')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">繁</button>
+              <button class="lang-option" data-lang="en" onclick="I18N.setLang('en')" style="background: none; border: none; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">EN</button>
+            </div>
+          </nav>
+
+          <button id="mobile-menu-toggle" aria-label="菜单" style="display: none; background: none; border: none; cursor: pointer; color: var(--color-text-primary); padding: var(--space-2);">
+            <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" style="display: none; padding: var(--space-6) var(--space-8) var(--space-8); border-top: 1px solid var(--color-border);">
+        <nav style="display: flex; flex-direction: column; gap: var(--space-6);">
+          <a href="index.html" class="nav-link" data-nav-key="index" data-i18n="nav-home">首页</a>
+          <a href="projects.html" class="nav-link" data-nav-key="projects" data-i18n="nav-projects">漫游此园</a>
+          <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-active="true" data-i18n="nav-philosophy">园之生长</a>
+          <a href="about.html" class="nav-link" data-nav-key="about" data-i18n="nav-about">关于我们</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <div id="page-content" style="padding-top: var(--space-20);">
+      <!-- Page Banner -->
+      <section class="page-banner">
+        <img src="assets/images/image_0_2gus5p.png" alt="" aria-hidden="true">
+        <div class="banner-content fade-in">
+          <h1 data-i18n="phil-heading">园之生长</h1>
+          <p data-i18n="phil-intro">一片荒芜，慢慢长成园</p>
+        </div>
+      </section>
+
+      <div class="hairline-divider"><hr></div>
+
+      <!-- 引言 -->
+      <section class="fade-in" aria-label="引言" style="max-width: var(--max-width-narrow); margin: 0 auto; padding: 0 var(--space-8) var(--space-32);">
+        <p class="font-cn" style="font-size: var(--text-xl); font-weight: var(--weight-light); line-height: 2.0; color: var(--color-text-primary); margin-bottom: var(--space-10); text-align: center;" data-i18n="phil-h1-p1">一座园子，不是建成的，是长成的。<br>从第一铲土落下，到枝叶交叠成荫，<br>时间在这里缓慢地做着它自己的事。<br>石头住下来，苔藓爬上来，树木学会了风的语言。<br>它至今仍在生长——每一个春天都带来新的故事。</p>
+        <figure class="intro-figure">
+          <img src="assets/images/image_16_o9tsff.jpg" alt="月门框景" loading="lazy" class="intro-img">
+        </figure>
+      </section>
+
+      <div class="hairline-divider"><hr></div>
+
+      <!-- 笔尖构园 -->
+      <div class="craft-section fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-12) var(--space-8) var(--space-20);">
+        <div class="craft-title-wrapper">
+          <h3 class="craft-title" data-i18n="draft-title">笔尖构园</h3>
+        </div>
+        <p class="craft-desc" data-i18n="draft-desc">这组草图记录了岭南私家园林的构思推敲，空间的疏密、视线的开合、光影的来去，在纸面上反复丈量之后，才落定成园。</p>
+        <div id="draftSwiperContainer" class="swiper-container">
+          <div id="draftSwiperViewport" class="swiper-viewport">
+            <div id="draftSwiperTrack" class="swiper-track">
+              <div class="swiper-slide" onclick="openDraftLightbox('assets/images/image_draft_0.jpg')">
+                <img src="assets/images/image_draft_0.jpg" alt="笔尖构园 — 草图一">
+              </div>
+              <div class="swiper-slide" onclick="openDraftLightbox('assets/images/image_draft_1.png')">
+                <img src="assets/images/image_draft_1.png" alt="笔尖构园 — 草图二">
+              </div>
+              <div class="swiper-slide" onclick="openDraftLightbox('assets/images/image_draft_2.jpg')">
+                <img src="assets/images/image_draft_2.jpg" alt="笔尖构园 — 草图三">
+              </div>
+              <div class="swiper-slide" onclick="openDraftLightbox('assets/images/image_draft_3.jpg')">
+                <img src="assets/images/image_draft_3.jpg" alt="笔尖构园 — 草图四">
+              </div>
+              <div class="swiper-slide" onclick="openDraftLightbox('assets/images/image_draft_4.jpg')">
+                <img src="assets/images/image_draft_4.jpg" alt="笔尖构园 — 草图五">
+              </div>
+              <div class="swiper-slide" onclick="openDraftLightbox('assets/images/image_draft_5.jpg')">
+                <img src="assets/images/image_draft_5.jpg" alt="笔尖构园 — 草图六">
+              </div>
+            </div>
+          </div>
+          <button class="swiper-btn prev" onclick="draftSlide(-1)">&#8249;</button>
+          <button class="swiper-btn next" onclick="draftSlide(1)">&#8250;</button>
+        </div>
+        <div class="swiper-dots">
+          <span id="draftDot0" class="swiper-dot active" onclick="draftGo(0)"></span>
+          <span id="draftDot1" class="swiper-dot" onclick="draftGo(1)"></span>
+          <span id="draftDot2" class="swiper-dot" onclick="draftGo(2)"></span>
+          <span id="draftDot3" class="swiper-dot" onclick="draftGo(3)"></span>
+          <span id="draftDot4" class="swiper-dot" onclick="draftGo(4)"></span>
+          <span id="draftDot5" class="swiper-dot" onclick="draftGo(5)"></span>
+        </div>
+        <p id="draftCounter" class="swiper-counter">1 / 6</p>
+      </div>
+
+      <div id="draftLightbox" class="lightbox" onclick="closeLightbox('draftLightbox')">
+        <img id="draftLightboxImg" src="" alt="">
+      </div>
+
+      <!-- 植树 -->
+      <div class="craft-section fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-12) var(--space-8) var(--space-20);">
+        <div class="craft-title-wrapper">
+          <h3 class="craft-title" data-i18n="plant-title">植树</h3>
+        </div>
+        <p class="craft-desc" data-i18n="plant-desc">荔园内种有古荔树、乌榄树、凤凰木。<br>看似简单的树种，其实是画龙点睛、立意高深呐。<br>这是个有使命、有灵魂的园林！</p>
+        <div id="plantSwiperContainer" class="swiper-container">
+          <div id="plantSwiperViewport" class="swiper-viewport">
+            <div id="plantSwiperTrack" class="swiper-track">
+              <div class="swiper-slide" onclick="openPlantLightbox('assets/images/image_17_js5tgm.jpg')">
+                <img src="assets/images/image_17_js5tgm.jpg" alt="植树 — 现场一">
+              </div>
+              <div class="swiper-slide" onclick="openPlantLightbox('assets/images/image_18_ys395o.jpg')">
+                <img src="assets/images/image_18_ys395o.jpg" alt="植树 — 现场二">
+              </div>
+              <div class="swiper-slide" onclick="openPlantLightbox('assets/images/image_plant_3.jpg')">
+                <img src="assets/images/image_plant_3.jpg" alt="植树 — 现场三">
+              </div>
+              <div class="swiper-slide" onclick="openPlantLightbox('assets/images/image_plant_4.jpg')">
+                <img src="assets/images/image_plant_4.jpg" alt="植树 — 现场四">
+              </div>
+              <div class="swiper-slide" onclick="openPlantLightbox('assets/images/image_plant_5.jpg')">
+                <img src="assets/images/image_plant_5.jpg" alt="植树 — 现场五">
+              </div>
+            </div>
+          </div>
+          <button class="swiper-btn prev" onclick="plantSlide(-1)">&#8249;</button>
+          <button class="swiper-btn next" onclick="plantSlide(1)">&#8250;</button>
+        </div>
+        <div class="swiper-dots">
+          <span id="plantDot0" class="swiper-dot active" onclick="plantGo(0)"></span>
+          <span id="plantDot1" class="swiper-dot" onclick="plantGo(1)"></span>
+          <span id="plantDot2" class="swiper-dot" onclick="plantGo(2)"></span>
+          <span id="plantDot3" class="swiper-dot" onclick="plantGo(3)"></span>
+          <span id="plantDot4" class="swiper-dot" onclick="plantGo(4)"></span>
+        </div>
+        <p id="plantCounter" class="swiper-counter">1 / 5</p>
+      </div>
+
+      <div id="plantLightbox" class="lightbox" onclick="closeLightbox('plantLightbox')">
+        <img id="plantLightboxImg" src="" alt="">
+      </div>
+
+      <!-- 置石 -->
+      <div class="craft-section fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-12) var(--space-8) var(--space-20);">
+        <div class="craft-title-wrapper">
+          <h3 class="craft-title" data-i18n="stonecraft-title">置石</h3>
+        </div>
+        <p class="craft-desc" data-i18n="stonecraft-desc">水系上无数颇有名堂的巨型灵石、仙石、奇石分布其上。<br>从选料到巨石安装，充分体现了置石艺术的最高水平。</p>
+        <div id="stonecraftSwiperContainer" class="swiper-container">
+          <div id="stonecraftSwiperViewport" class="swiper-viewport">
+            <div id="stonecraftSwiperTrack" class="swiper-track">
+              <div class="swiper-slide" onclick="openStonecraftLightbox('assets/images/image_20_rig60c.jpg')">
+                <img src="assets/images/image_20_rig60c.jpg" alt="置石 — 细部一">
+              </div>
+              <div class="swiper-slide" onclick="openStonecraftLightbox('assets/images/image_21_1fuclm.jpg')">
+                <img src="assets/images/image_21_1fuclm.jpg" alt="置石 — 细部二">
+              </div>
+              <div class="swiper-slide" onclick="openStonecraftLightbox('assets/images/image_22_gvcgko.jpg')">
+                <img src="assets/images/image_22_gvcgko.jpg" alt="置石 — 细部三">
+              </div>
+              <div class="swiper-slide" onclick="openStonecraftLightbox('assets/images/image_stonecraft_4.jpg')">
+                <img src="assets/images/image_stonecraft_4.jpg" alt="置石 — 细部四">
+              </div>
+            </div>
+          </div>
+          <button class="swiper-btn prev" onclick="stonecraftSlide(-1)">&#8249;</button>
+          <button class="swiper-btn next" onclick="stonecraftSlide(1)">&#8250;</button>
+        </div>
+        <div class="swiper-dots">
+          <span id="stonecraftDot0" class="swiper-dot active" onclick="stonecraftGo(0)"></span>
+          <span id="stonecraftDot1" class="swiper-dot" onclick="stonecraftGo(1)"></span>
+          <span id="stonecraftDot2" class="swiper-dot" onclick="stonecraftGo(2)"></span>
+          <span id="stonecraftDot3" class="swiper-dot" onclick="stonecraftGo(3)"></span>
+        </div>
+        <p id="stonecraftCounter" class="swiper-counter">1 / 4</p>
+      </div>
+
+      <div id="stonecraftLightbox" class="lightbox" onclick="closeLightbox('stonecraftLightbox')">
+        <img id="stonecraftLightboxImg" src="" alt="">
+      </div>
+
+      <!-- 砖瓦砌筑 -->
+      <div class="craft-section fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-12) var(--space-8) var(--space-20);">
+        <div class="craft-title-wrapper">
+          <h3 class="craft-title" data-i18n="brick-title">砖瓦砌筑</h3>
+        </div>
+        <p class="craft-desc" data-i18n="brick-desc">砖木石为骨，此墙暗藏“袖里乾坤”。<br>它摒弃了“先砌墙、后贴砖”的现代取巧之法。<br>每一块精细鎅磨的青砖，都实打实地砌成了里外双层的空心实砌墙。</p>
+        <div id="brickSwiperContainer" class="swiper-container">
+          <div id="brickSwiperViewport" class="swiper-viewport">
+            <div id="brickSwiperTrack" class="swiper-track">
+              <div class="swiper-slide" onclick="openBrickLightbox('assets/images/image_23_6d2wpj.jpg')">
+                <img src="assets/images/image_23_6d2wpj.jpg" alt="砖瓦砌筑 — 细部一">
+              </div>
+              <div class="swiper-slide" onclick="openBrickLightbox('assets/images/image_24_9qqt1g.jpg')">
+                <img src="assets/images/image_24_9qqt1g.jpg" alt="砖瓦砌筑 — 细部二">
+              </div>
+              <div class="swiper-slide" onclick="openBrickLightbox('assets/images/image_25_50fjm6.jpg')">
+                <img src="assets/images/image_25_50fjm6.jpg" alt="砖瓦砌筑 — 细部三">
+              </div>
+              <div class="swiper-slide" onclick="openBrickLightbox('assets/images/image_26_js5tgm.jpg')">
+                <img src="assets/images/image_26_js5tgm.jpg" alt="砖瓦砌筑 — 细部四">
+              </div>
+            </div>
+          </div>
+          <button class="swiper-btn prev" onclick="brickSlide(-1)">&#8249;</button>
+          <button class="swiper-btn next" onclick="brickSlide(1)">&#8250;</button>
+        </div>
+        <div class="swiper-dots">
+          <span id="brickDot0" class="swiper-dot active" onclick="brickGo(0)"></span>
+          <span id="brickDot1" class="swiper-dot" onclick="brickGo(1)"></span>
+          <span id="brickDot2" class="swiper-dot" onclick="brickGo(2)"></span>
+          <span id="brickDot3" class="swiper-dot" onclick="brickGo(3)"></span>
+        </div>
+        <p id="brickCounter" class="swiper-counter">1 / 4</p>
+      </div>
+
+      <div id="brickLightbox" class="lightbox" onclick="closeLightbox('brickLightbox')">
+        <img id="brickLightboxImg" src="" alt="">
+      </div>
+
+      <!-- 石材制装 -->
+      <div class="craft-section fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-24) var(--space-8) var(--space-20);">
+        <div class="craft-title-wrapper">
+          <h3 class="craft-title" data-i18n="stonefab-title">石材制装</h3>
+        </div>
+        <p class="craft-desc" data-i18n="stonefab-desc">墙外柱廊、墙体立柱和门窗外框，基本上都用完整的石材。<br>这些石材在材质和色泽的统一、表面打凿的细密、拼合的结构感，都十分到位。</p>
+        <div id="stonefabSwiperContainer" class="swiper-container">
+          <div id="stonefabSwiperViewport" class="swiper-viewport">
+            <div id="stonefabSwiperTrack" class="swiper-track">
+              <div class="swiper-slide" onclick="openStonefabLightbox('assets/images/image_27_ikqifx.jpg')">
+                <img src="assets/images/image_27_ikqifx.jpg" alt="石材制装 — 细部一">
+              </div>
+              <div class="swiper-slide" onclick="openStonefabLightbox('assets/images/image_28_5ciot4.jpg')">
+                <img src="assets/images/image_28_5ciot4.jpg" alt="石材制装 — 细部二">
+              </div>
+              <div class="swiper-slide" onclick="openStonefabLightbox('assets/images/image_29_8bljur.jpg')">
+                <img src="assets/images/image_29_8bljur.jpg" alt="石材制装 — 细部三">
+              </div>
+              <div class="swiper-slide" onclick="openStonefabLightbox('assets/images/image_30_bt6que.jpg')">
+                <img src="assets/images/image_30_bt6que.jpg" alt="石材制装 — 细部四">
+              </div>
+              <div class="swiper-slide" onclick="openStonefabLightbox('assets/images/image_31_js5tgm.jpg')">
+                <img src="assets/images/image_31_js5tgm.jpg" alt="石材制装 — 细部五">
+              </div>
+            </div>
+          </div>
+          <button class="swiper-btn prev" onclick="stonefabSlide(-1)">&#8249;</button>
+          <button class="swiper-btn next" onclick="stonefabSlide(1)">&#8250;</button>
+        </div>
+        <div class="swiper-dots">
+          <span id="stonefabDot0" class="swiper-dot active" onclick="stonefabGo(0)"></span>
+          <span id="stonefabDot1" class="swiper-dot" onclick="stonefabGo(1)"></span>
+          <span id="stonefabDot2" class="swiper-dot" onclick="stonefabGo(2)"></span>
+          <span id="stonefabDot3" class="swiper-dot" onclick="stonefabGo(3)"></span>
+          <span id="stonefabDot4" class="swiper-dot" onclick="stonefabGo(4)"></span>
+        </div>
+        <p id="stonefabCounter" class="swiper-counter">1 / 5</p>
+      </div>
+
+      <div id="stonefabLightbox" class="lightbox" onclick="closeLightbox('stonefabLightbox')">
+        <img id="stonefabLightboxImg" src="" alt="">
+      </div>
+
+      <!-- 木作工艺 -->
+      <div class="craft-section fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-24) var(--space-8) var(--space-20);">
+        <div class="craft-title-wrapper">
+          <h3 class="craft-title" data-i18n="wood-title">木作工艺</h3>
+        </div>
+        <p class="craft-desc" data-i18n="wood-desc">传统榫卯造就这扇柚木满州窗，大大小小的彩色琉璃嵌于原色窗格之间。<br>古朴雅致，文士风流，望之便生怀旧之情。</p>
+        <div id="woodSwiperContainer" class="swiper-container">
+          <div id="woodSwiperViewport" class="swiper-viewport">
+            <div id="woodSwiperTrack" class="swiper-track">
+              <div class="swiper-slide" onclick="openWoodLightbox('assets/images/image_32_fzzd22.jpg')">
+                <img src="assets/images/image_32_fzzd22.jpg" alt="木作工艺 — 细部一">
+              </div>
+              <div class="swiper-slide" onclick="openWoodLightbox('assets/images/image_33_djtwpr.jpg')">
+                <img src="assets/images/image_33_djtwpr.jpg" alt="木作工艺 — 细部二">
+              </div>
+              <div class="swiper-slide" onclick="openWoodLightbox('assets/images/image_34_ucuycd.jpg')">
+                <img src="assets/images/image_34_ucuycd.jpg" alt="木作工艺 — 细部三">
+              </div>
+              <div class="swiper-slide" onclick="openWoodLightbox('assets/images/image_35_2j6wfj.jpg')">
+                <img src="assets/images/image_35_2j6wfj.jpg" alt="木作工艺 — 细部四">
+              </div>
+              <div class="swiper-slide" onclick="openWoodLightbox('assets/images/image_36_bjpg6f.jpg')">
+                <img src="assets/images/image_36_bjpg6f.jpg" alt="木作工艺 — 细部五">
+              </div>
+            </div>
+          </div>
+          <button class="swiper-btn prev" onclick="woodSlide(-1)">&#8249;</button>
+          <button class="swiper-btn next" onclick="woodSlide(1)">&#8250;</button>
+        </div>
+        <div class="swiper-dots">
+          <span id="woodDot0" class="swiper-dot active" onclick="woodGo(0)"></span>
+          <span id="woodDot1" class="swiper-dot" onclick="woodGo(1)"></span>
+          <span id="woodDot2" class="swiper-dot" onclick="woodGo(2)"></span>
+          <span id="woodDot3" class="swiper-dot" onclick="woodGo(3)"></span>
+          <span id="woodDot4" class="swiper-dot" onclick="woodGo(4)"></span>
+        </div>
+        <p id="woodCounter" class="swiper-counter">1 / 5</p>
+      </div>
+
+      <div id="woodLightbox" class="lightbox" onclick="closeLightbox('woodLightbox')">
+        <img id="woodLightboxImg" src="" alt="">
+      </div>
+
+      <!-- 三雕两塑 -->
+      <div class="craft-section fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-24) var(--space-8) var(--space-20);">
+        <div class="craft-title-wrapper">
+          <h3 class="craft-title" data-i18n="craft-title">三雕两塑</h3>
+        </div>
+        <p class="craft-desc" data-i18n="craft-desc">这里四处可见的“三雕两塑”（即砖雕、木雕、石雕、灰塑、陶塑）。<br>品相都是超凡脱俗，均出自传承千年的名家手笔。<br>“荔仙园”乃玲珑秘境也。</p>
+        <div id="craftSwiperContainer" class="swiper-container">
+          <div id="craftSwiperViewport" class="swiper-viewport">
+            <div id="craftSwiperTrack" class="swiper-track">
+              <div class="swiper-slide" onclick="openCraftLightbox('assets/images/image_craft_brick.jpg')">
+                <img src="assets/images/image_craft_brick.jpg" alt="三雕两塑 — 砖雕">
+              </div>
+              <div class="swiper-slide" onclick="openCraftLightbox('assets/images/image_craft_stone.jpg')">
+                <img src="assets/images/image_craft_stone.jpg" alt="三雕两塑 — 石雕">
+              </div>
+              <div class="swiper-slide" onclick="openCraftLightbox('assets/images/image_37_iz5rqo.jpg')">
+                <img src="assets/images/image_37_iz5rqo.jpg" alt="三雕两塑 — 细部一">
+              </div>
+              <div class="swiper-slide" onclick="openCraftLightbox('assets/images/image_craft_stone1.jpg')">
+                <img src="assets/images/image_craft_stone1.jpg" alt="三雕两塑 — 石雕一">
+              </div>
+              <div class="swiper-slide" onclick="openCraftLightbox('assets/images/image_38_1clkvy.jpg')">
+                <img src="assets/images/image_38_1clkvy.jpg" alt="三雕两塑 — 细部二">
+              </div>
+              <div class="swiper-slide" onclick="openCraftLightbox('assets/images/image_39_ra5lwy.jpg')">
+                <img src="assets/images/image_39_ra5lwy.jpg" alt="三雕两塑 — 细部三">
+              </div>
+              <div class="swiper-slide" onclick="openCraftLightbox('assets/images/image_craft_pottery.jpg')">
+                <img src="assets/images/image_craft_pottery.jpg" alt="三雕两塑 — 陶塑">
+              </div>
+            </div>
+          </div>
+          <button class="swiper-btn prev" onclick="craftSlide(-1)">&#8249;</button>
+          <button class="swiper-btn next" onclick="craftSlide(1)">&#8250;</button>
+        </div>
+        <div class="swiper-dots">
+          <span id="craftDot0" class="swiper-dot active" onclick="craftGo(0)"></span>
+          <span id="craftDot1" class="swiper-dot" onclick="craftGo(1)"></span>
+          <span id="craftDot2" class="swiper-dot" onclick="craftGo(2)"></span>
+          <span id="craftDot3" class="swiper-dot" onclick="craftGo(3)"></span>
+          <span id="craftDot4" class="swiper-dot" onclick="craftGo(4)"></span>
+          <span id="craftDot5" class="swiper-dot" onclick="craftGo(5)"></span>
+          <span id="craftDot6" class="swiper-dot" onclick="craftGo(6)"></span>
+        </div>
+        <p id="craftCounter" class="swiper-counter">1 / 7</p>
+      </div>
+
+      <div id="craftLightbox" class="lightbox" onclick="closeLightbox('craftLightbox')">
+        <img id="craftLightboxImg" src="" alt="">
+      </div>
+
+      <!-- Conference Paper -->
+      <div class="fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-24) var(--space-8) var(--space-16); text-align: center;">
+        <img src="assets/images/image_40_37vkzw.png" alt="中国文化遗产大会论文集收录" style="max-width: 560px; width: 100%; height: auto; object-fit: contain; display: block; margin: 0 auto var(--space-6); border: 1px solid var(--color-border-subtle);">
+        <p class="font-cn" style="font-weight: var(--weight-regular); color: var(--color-text-primary); line-height: var(--leading-relaxed); margin: 0; font-size: 20px;" data-i18n="conference-note">该作品收录于中国文化遗产大会论文集中</p>
+      </div>
+
+      <!-- CTA -->
+      <section class="fade-in" aria-label="了解更多" style="max-width: var(--max-width-narrow); margin: 0 auto; padding: var(--space-16) var(--space-8) var(--space-24); text-align: center;">
+        <p class="font-cn" style="font-size: 18px; font-weight: var(--weight-regular); color: var(--color-text-secondary); margin-bottom: var(--space-6); letter-spacing: var(--tracking-wide);" data-i18n="phil-cta-text">了解这些理念背后的造园者</p>
+        <a href="about.html" class="font-cn" style="font-size: var(--text-sm); font-weight: var(--weight-regular); color: var(--color-text-primary); text-decoration: none; letter-spacing: var(--tracking-wide); padding-bottom: 2px; border-bottom: 1px solid var(--color-border); transition: border-color var(--transition-base), color var(--transition-base);" data-i18n="cta-about">关于我们</a>
+      </section>
+    </div>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-20) var(--space-8) var(--space-12); border-top: 1px solid var(--color-border);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4);">
+          <span data-i18n="brand-name" style="font-family: var(--font-cn); font-size: var(--text-sm); font-weight: var(--weight-regular); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide);">峯境园林</span>
+          <span data-i18n="footer-copyright">© 峯境景观规划设计有限公司 版权所有</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>lucide.createIcons();</script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script>
+    function closeLightbox(id) {
+      var lb = document.getElementById(id);
+      if (lb) {
+        lb.classList.remove('open');
+        setTimeout(function () { lb.style.display = 'none'; }, 350);
+      }
+    }
+
+    function openLightbox(id, src) {
+      var lb = document.getElementById(id);
+      var img = document.getElementById(id + 'Img');
+      if (lb && img) {
+        img.src = src;
+        lb.style.display = 'flex';
+        requestAnimationFrame(function () { lb.classList.add('open'); });
+      }
+    }
+
+    window.openPlantLightbox = function(src) { openLightbox('plantLightbox', src); };
+    window.openStonecraftLightbox = function(src) { openLightbox('stonecraftLightbox', src); };
+    window.openBrickLightbox = function(src) { openLightbox('brickLightbox', src); };
+    window.openStonefabLightbox = function(src) { openLightbox('stonefabLightbox', src); };
+    window.openWoodLightbox = function(src) { openLightbox('woodLightbox', src); };
+    window.openCraftLightbox = function(src) { openLightbox('craftLightbox', src); };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      createSwiper('draft', 6);
+      createSwiper('plant', 5);
+      createSwiper('stonecraft', 4);
+      createSwiper('brick', 4);
+      createSwiper('stonefab', 5);
+      createSwiper('wood', 5);
+      createSwiper('craft', 7);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') {
+          plantSlide(-1); stonecraftSlide(-1); brickSlide(-1); stonefabSlide(-1); woodSlide(-1); craftSlide(-1);
+        }
+        if (e.key === 'ArrowRight') {
+          plantSlide(1); stonecraftSlide(1); brickSlide(1); stonefabSlide(1); woodSlide(1); craftSlide(1);
+        }
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.lightbox.open').forEach(function (lb) {
+            lb.classList.remove('open');
+            setTimeout(function () { lb.style.display = 'none'; }, 350);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

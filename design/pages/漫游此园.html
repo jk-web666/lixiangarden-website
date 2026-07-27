@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>漫游此园</title>
+    <style id="theme-vars">
+/* =====================================================
+   Brand Design Tokens — Chinese Garden Studio
+   Tone: Luxury/refined editorial, museum-like stillness
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+:root {
+  /* ── Color System ── */
+  /* Primary: deep ink black inspired by Chinese calligraphy ink */
+  --color-primary: #1a1714;
+  --color-primary-light: #2c2723;
+  --color-primary-lighter: #4a433c;
+  --color-primary-dark: #0d0b09;
+  --color-primary-50: rgba(26, 23, 20, 0.05);
+  --color-primary-100: rgba(26, 23, 20, 0.1);
+  --color-primary-200: rgba(26, 23, 20, 0.2);
+  --color-primary-300: rgba(26, 23, 20, 0.3);
+
+  /* Background palette: aligned with design philosophy page */
+  --color-bg: #f7f4f0;
+  --color-bg-subtle: #f0ebe4;
+  --color-bg-muted: #e8e2d9;
+  --color-bg-elevated: #ffffff;
+  --color-bg-overlay: rgba(247, 244, 240, 0.92);
+
+  /* Text on light backgrounds */
+  --color-text-primary: #1a1714;
+  --color-text-secondary: #5c544b;
+  --color-text-tertiary: #8a8078;
+  --color-text-inverse: #f7f4f0;
+  --color-text-accent: #8b7355;
+
+  /* Border system: warm, nearly invisible */
+  --color-border: #d9d2c7;
+  --color-border-subtle: #ebe6de;
+  --color-border-strong: #a39889;
+
+  /* State colors (semantic only) */
+  --state-success: #5a7a5e;
+  --state-warning: #b8944a;
+  --state-error: #9e4a4a;
+  --state-info: #5a7a8b;
+
+  /* ── Typography ── */
+  --font-display: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+  --font-body: 'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+  --font-cn: 'Noto Serif SC', 'SimSun', 'STSong', serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+  --text-4xl: 3.5rem;
+  --text-5xl: 4.5rem;
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+  --leading-loose: 2.0;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.16em;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+  --space-48: 12rem;
+
+  /* ── Shape (Restrained) ── */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* ── Surface & Depth ── */
+  /* Static surfaces use border-first; shadow alpha <= 0.05 */
+  --shadow-subtle: 0 1px 3px rgba(26, 23, 20, 0.03);
+  --shadow-elevated: 0 4px 12px rgba(26, 23, 20, 0.05);
+  --shadow-float: 0 12px 40px rgba(26, 23, 20, 0.12);
+
+  /* ── Transitions ── */
+  --transition-fast: 200ms ease;
+  --transition-base: 350ms ease;
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-elegant: 800ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── Layout ── */
+  --max-width-page: 1400px;
+  --max-width-content: 960px;
+  --max-width-narrow: 720px;
+}
+
+/* Dark mode (for night-view gallery sections) */
+.dark, [data-theme="dark"] {
+  --color-bg: #12110f;
+  --color-bg-subtle: #1a1714;
+  --color-bg-muted: #242019;
+  --color-bg-elevated: #1e1b17;
+  --color-bg-overlay: rgba(18, 17, 15, 0.92);
+
+  --color-text-primary: #f0ebe4;
+  --color-text-secondary: #a39889;
+  --color-text-tertiary: #6b6157;
+  --color-text-inverse: #1a1714;
+  --color-text-accent: #c4a87a;
+
+  --color-border: #2c2723;
+  --color-border-subtle: #242019;
+  --color-border-strong: #4a433c;
+}
+
+/* ── Typography Classes ── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-cn {
+  font-family: var(--font-cn);
+}
+
+.text-serif {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-tight);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-primary: var(--color-primary);
+    --color-border: var(--color-border);
+  }
+  @layer base {
+    body { background: var(--color-bg); color: var(--color-text-primary); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      .lang-option.active { opacity: 1 !important; color: var(--color-text-primary) !important; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+      @media (max-width: 767px) {
+        body { font-size: 14px; }
+        [style*="font-size: 20px"] { font-size: 17px !important; }
+        [style*="font-size: var(--text-2xl)"] { font-size: var(--text-xl) !important; }
+        [style*="font-size: var(--text-3xl)"] { font-size: var(--text-2xl) !important; }
+        [style*="font-size: var(--text-4xl)"] { font-size: var(--text-3xl) !important; }
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main>
+
+    <!-- ══════════════════════════════════════════════
+         SITE HEADER
+         ══════════════════════════════════════════════ -->
+    <header class="site-header" id="site-header">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-6) var(--space-8);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <a href="index.html" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-regular); color: var(--color-text-primary); text-decoration: none; letter-spacing: var(--tracking-wide);">峯境园林</a>
+          <nav style="display: flex; align-items: center; gap: var(--space-8);">
+            <a href="index.html"    class="nav-link" data-nav-key="index"      data-dom-id="nav-index" data-i18n="nav-home">首页</a>
+            <a href="projects.html"  class="nav-link" data-nav-key="projects"   data-dom-id="nav-projects" data-active="true" data-i18n="nav-projects">漫游此园</a>
+            <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-dom-id="nav-philosophy" data-i18n="nav-philosophy">园之生长</a>
+            <a href="about.html"     class="nav-link" data-nav-key="about"      data-dom-id="nav-about" data-i18n="nav-about">关于我们</a>
+            <div class="lang-selector" style="display: flex; gap: var(--space-2); margin-left: var(--space-6); align-items: center;">
+              <button class="lang-option" data-lang="zh-CN" onclick="I18N.setLang('zh-CN')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">简</button>
+              <button class="lang-option" data-lang="zh-TW" onclick="I18N.setLang('zh-TW')" style="background: none; border: none; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">繁</button>
+              <button class="lang-option" data-lang="en" onclick="I18N.setLang('en')" style="background: none; border: none; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 2px 8px; opacity: 0.6; transition: opacity var(--transition-fast); letter-spacing: 0.04em;">EN</button>
+            </div>
+          </nav>
+          <button id="mobile-menu-toggle" aria-label="菜单" style="display: none; background: none; border: none; cursor: pointer; color: var(--color-text-primary); padding: var(--space-2);">
+            <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" style="display: none; padding: var(--space-6) var(--space-8) var(--space-8); border-top: 1px solid var(--color-border);">
+        <nav style="display: flex; flex-direction: column; gap: var(--space-6);">
+          <a href="index.html"      class="nav-link" data-nav-key="index"      data-dom-id="nav-index">首页</a>
+          <a href="projects.html"    class="nav-link" data-nav-key="projects"   data-dom-id="nav-projects" data-active="true">漫游此园</a>
+          <a href="philosophy.html"  class="nav-link" data-nav-key="philosophy" data-dom-id="nav-philosophy">园之生长</a>
+          <a href="about.html"       class="nav-link" data-nav-key="about"      data-dom-id="nav-about">关于我们</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════
+         PAGE CONTENT
+         ══════════════════════════════════════════════ -->
+    <div id="page-content" style="padding-top: var(--space-20);">
+
+      <!-- ── Page Title Section ── -->
+      <section style="height: 220px; padding-top: 60px; text-align: center; position: relative; overflow: hidden; margin: 0 calc(-1 * var(--space-8));">
+        <img src="../assets/image_0_2gus5p.png" alt="" aria-hidden="true" style="position: absolute; inset: -20px; width: calc(100% + 40px); height: calc(100% + 40px); object-fit: cover; object-position: center; pointer-events: none; filter: blur(0px); -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%); mask-image: linear-gradient(to bottom, black 60%, transparent 100%);">
+          <div style="position: relative; z-index: 1; padding: 0 var(--space-8);">
+        <h1 data-i18n="projects-heading" style="font-family: var(--font-cn); font-size: var(--text-4xl); font-weight: var(--weight-medium); letter-spacing: var(--tracking-tight); color: #ffffff; margin: 0 0 var(--space-6) 0; text-wrap: balance; word-break: keep-all; overflow-wrap: break-word; text-shadow: 0 1px 12px rgba(0,0,0,0.5), 0 0 30px rgba(0,0,0,0.2);">漫游此园</h1>
+        <p data-i18n="projects-subtitle" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-regular); color: rgba(255,255,255,0.92); max-width: var(--max-width-narrow); margin: 0 auto; line-height: var(--leading-relaxed); text-shadow: 0 1px 8px rgba(0,0,0,0.4);">每座园林，皆为天地与人心之间的一次对话</p>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════
+           PROJECT 1 — 苏州·拙政雅苑 (Full-Bleed Hero)
+           ══════════════════════════════════════════════ -->
+      <section id="project-1" class="project-entry" style="position: relative; width: 100%;">
+        <!-- Full-bleed hero image -->
+        <div style="position: relative; width: 100%; max-width: var(--max-width-page); margin: 0 auto; overflow: hidden; background: var(--color-bg-muted);">
+          <img src="../assets/image_1_jmwitv.png" alt="苏州拙政雅苑园林实景" style="width: 100%; height: auto; max-height: 85vh; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant);">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: var(--space-12) var(--space-8) var(--space-8); background: linear-gradient(to top, rgba(26, 23, 20, 0.5) 0%, transparent 100%);">
+            <h2 data-i18n="proj1-title" style="font-family: var(--font-cn); font-size: var(--text-3xl); font-weight: var(--weight-medium); color: var(--color-text-inverse); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;"> 荔仙园</h2>
+            <span data-i18n="proj1-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: rgba(247, 244, 240, 0.7); letter-spacing: var(--tracking-wide);"> 广东广州</span>
+          </div>
+        </div>
+        <!-- Text description in narrow column -->
+        <div style="max-width: var(--max-width-narrow); margin: 0 auto; padding: var(--space-16) var(--space-8) var(--space-24);">
+          <p data-i18n="proj1-desc" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">以水为脉，以石为骨。借拙政园之古意，筑当代雅居之私园。</p>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           PROJECT 2 — 杭州·云栖别业 (Asymmetric 60/40)
+           ══════════════════════════════════════════════ -->
+      <!-- ── Section: 室外之景 ── -->
+      <div style="max-width: var(--max-width-page); margin: 0 auto var(--space-12); padding: 0 var(--space-8);">
+        <div style="border: 2px solid rgba(72,109,49,0.25); padding: 1px; background: var(--color-bg);">
+          <div style="border: 1px solid rgba(72,109,49,0.15); padding: var(--space-6) var(--space-8); text-align: center; background: linear-gradient(135deg, rgba(72,109,49,0.08) 0%, rgba(45,80,22,0.05) 50%, rgba(72,109,49,0.08) 100%); background-size: 200% 200%; position: relative;">
+            <div style="position: absolute; inset: 0; opacity: 0.03; background-image: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(0,0,0,1) 8px, rgba(0,0,0,1) 9px), repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(0,0,0,1) 8px, rgba(0,0,0,1) 9px); pointer-events: none;"></div>
+            <h3 data-i18n="section-outdoor" style="font-family: var(--font-cn); font-size: var(--text-3xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: 0.15em; position: relative; margin: 0;">室 外 之 景</h3>
+          </div>
+        </div>
+      </div>
+
+      <section id="project-2" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 60/40 asymmetric layout -->
+          <div style="display: none; grid-template-columns: 3fr 2fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_2_xa21be.png" alt="杭州云栖别业花园实景" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; opacity: 0.95; transition: opacity var(--transition-elegant);">
+            </div>
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="proj2-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">荷花池</h2>
+              
+              <p data-i18n="proj2-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">园中古木参天，修竹夹道，水声与风声相和，是为隐者之居。</p>
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_3_vk0k45.jpg" alt="杭州云栖别业花园实景" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;">
+            </div>
+            <div>
+              <h2 data-i18n="proj2-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">杭州 · 云栖别业</h2>
+              <span data-i18n="proj2-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">浙江杭州</span>
+              <p data-i18n="proj2-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">园中古木参天，修竹夹道，水声与风声相和，是为隐者之居。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Lixian Garden — 荔仙园 (Asymmetric 60/40, image left)
+           ══════════════════════════════════════════════ -->
+      <section id="lixiangu" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 60/40 layout (image left) -->
+          <div style="display: none; grid-template-columns: 3fr 2fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_4_js5tgm.jpg" alt="荔仙园 — 岭南山水园林" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="lixiangu-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">荷花池</h2>
+              
+              <p data-i18n="lixiangu-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_4_js5tgm.jpg" alt="荔仙园 — 岭南山水园林" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="lixiangu-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">荔仙园</h2>
+              <span data-i18n="lixiangu-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东广州</span>
+              <p data-i18n="lixiangu-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           PROJECT 3 — 北京·合院春秋 (Asymmetric 40/60, reversed)
+           ══════════════════════════════════════════════ -->
+      <section id="project-3" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 40/60 reversed layout -->
+          <div style="display: none; grid-template-columns: 2fr 3fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop-alt">
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="proj3-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">月洞</h2>
+              
+              <p data-i18n="proj3-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">四方院落，四时不同。春花秋叶，夏荫冬雪，皆纳于一院之中。</p>
+            </div>
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_5_6p7iju.png" alt="北京合院春秋庭院实景" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; opacity: 0.95; transition: opacity var(--transition-elegant);">
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile-alt">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_6_gsmf2w.jpg" alt="北京合院春秋庭院实景" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;">
+            </div>
+            <div>
+              <h2 data-i18n="proj3-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">北京 · 合院春秋</h2>
+              <span data-i18n="proj3-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">北京</span>
+              <p data-i18n="proj3-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">四方院落，四时不同。春花秋叶，夏荫冬雪，皆纳于一院之中。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Garden — 园 (50/50, text left, image right)
+           ══════════════════════════════════════════════ -->
+      <section id="garden-view" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 40/60 layout (text left, image right) -->
+          <div style="display: none; grid-template-columns: 2fr 3fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="garden-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">方胜</h2>
+              <span data-i18n="garden-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-10);">广东广州</span>
+              <p data-i18n="garden-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+            <!-- Image side (50%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_7_f2be6z.jpg" alt="园 — 岭南园林全景" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_7_f2be6z.jpg" alt="园 — 岭南园林全景" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="garden-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">园</h2>
+              <span data-i18n="garden-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东广州</span>
+              <p data-i18n="garden-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Courtyard — 院 (40/60, image left, text right)
+           ══════════════════════════════════════════════ -->
+      <section id="courtyard" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 60/40 layout (image left, text right) -->
+          <div style="display: none; grid-template-columns: 3fr 2fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_8_7oi2un.jpg" alt="院 — 岭南庭院空间" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="courtyard-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">秀楼</h2>
+              
+              <p data-i18n="courtyard-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_8_7oi2un.jpg" alt="院 — 岭南庭院空间" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="courtyard-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">院</h2>
+              <span data-i18n="courtyard-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东广州</span>
+              <p data-i18n="courtyard-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Courtyard Stone — 院中石 (60/40, image left, text right)
+           ══════════════════════════════════════════════ -->
+      <section id="courtyard-stone" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 60/40 layout (image left, text right) -->
+          <div style="display: none; grid-template-columns: 3fr 2fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_9_cynul5.jpg" alt="院中石 — 庭院置石" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="stone-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">荷花石</h2>
+              
+              <p data-i18n="stone-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_9_cynul5.jpg" alt="院中石 — 庭院置石" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="stone-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">院中石</h2>
+              <span data-i18n="stone-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东广州</span>
+              <p data-i18n="stone-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Courtyard 2 — 院（二）(60/40, image left, text right)
+           ══════════════════════════════════════════════ -->
+      <section id="courtyard-2" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 60/40 layout (image left, text right) -->
+          <div style="display: none; grid-template-columns: 3fr 2fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_10_kwl4fl.jpg" alt="院 — 岭南庭院空间" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="courtyard2-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">秀楼</h2>
+              
+              <p data-i18n="courtyard2-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_10_kwl4fl.jpg" alt="院 — 岭南庭院空间" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="courtyard2-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">院</h2>
+              <span data-i18n="courtyard2-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东广州</span>
+              <p data-i18n="courtyard2-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Corridor — 廊道 (Asymmetric 60/40, image left)
+           ══════════════════════════════════════════════ -->
+      <section id="corridor" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 60/40 layout (image left) -->
+          <div style="display: none; grid-template-columns: 3fr 2fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_11_86ncrv.png" alt="廊道 — 岭南园林游廊" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="corridor-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">廊道</h2>
+              
+              <p data-i18n="corridor-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_11_86ncrv.png" alt="廊道 — 岭南园林游廊" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="corridor-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">廊道</h2>
+              <span data-i18n="corridor-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东</span>
+              <p data-i18n="corridor-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Grey Sculpture — 灰塑 (50/50, text left, image right)
+           ══════════════════════════════════════════════ -->
+      <section id="grey-sculpture" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 50/50 layout (text left, image right) -->
+          <div style="display: none; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Text side (50%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="gs-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">灰塑</h2>
+              
+              <p data-i18n="gs-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+            <!-- Image side (50%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_12_2xc2qg.jpg" alt="灰塑 — 岭南屋顶灰塑工艺" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_12_2xc2qg.jpg" alt="灰塑 — 岭南屋顶灰塑工艺" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="gs-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">灰塑</h2>
+              <span data-i18n="gs-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东</span>
+              <p data-i18n="gs-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Manchurian Windows — 满洲玻璃窗
+           ══════════════════════════════════════════════ -->
+      <!-- ── Section: 室内之境 ── -->
+      <div style="max-width: var(--max-width-page); margin: 0 auto var(--space-12); padding: 0 var(--space-8);">
+        <div style="border: 2px solid rgba(139,90,43,0.25); padding: 1px; background: var(--color-bg);">
+          <div style="border: 1px solid rgba(139,90,43,0.15); padding: var(--space-6) var(--space-8); text-align: center; background: linear-gradient(135deg, rgba(139,90,43,0.08) 0%, rgba(100,65,30,0.05) 50%, rgba(139,90,43,0.08) 100%); background-size: 200% 200%; position: relative;">
+            <div style="position: absolute; inset: 0; opacity: 0.03; background-image: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(0,0,0,1) 8px, rgba(0,0,0,1) 9px), repeating-linear-gradient(-45deg, transparent, transparent 8px, rgba(0,0,0,1) 8px, rgba(0,0,0,1) 9px); pointer-events: none;"></div>
+            <h3 data-i18n="section-indoor" style="font-family: var(--font-cn); font-size: var(--text-3xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: 0.15em; position: relative; margin: 0;">室 内 之 境</h3>
+          </div>
+        </div>
+      </div>
+
+      <section id="manchurian-windows" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 60/40 reversed layout (image left) -->
+          <div style="display: none; grid-template-columns: 3fr 2fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_13_58qvr6.png" alt="满洲玻璃窗 — 岭南彩色玻璃窗工艺" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="mw1-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">满洲玻璃窗（一）</h2>
+              
+              <p data-i18n="mw1-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_13_58qvr6.png" alt="满洲玻璃窗 — 岭南彩色玻璃窗工艺" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="mw1-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">满洲玻璃窗</h2>
+              <span data-i18n="mw1-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东广州</span>
+              <p data-i18n="mw1-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Manchurian Windows (2) — 满洲玻璃窗（二）
+           ══════════════════════════════════════════════ -->
+      <section id="manchurian-windows-2" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 60/40 layout (image left) -->
+          <div style="display: none; grid-template-columns: 3fr 2fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_14_m9sdlq.jpg" alt="满洲玻璃窗（二）— 彩色玻璃窗光影" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+            <!-- Text side (40%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="mw2-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">满洲玻璃窗（二）</h2>
+              
+              <p data-i18n="mw2-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_14_m9sdlq.jpg" alt="满洲玻璃窗（二）— 彩色玻璃窗光影" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="mw2-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">满洲玻璃窗（二）</h2>
+              <span data-i18n="mw2-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东广州</span>
+              <p data-i18n="mw2-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hairline Divider -->
+      <div style="max-width: var(--max-width-content); margin: 0 auto; height: 1px; background: var(--color-border-subtle);"></div>
+
+      <!-- ══════════════════════════════════════════════
+           Living Room — 会客厅 (Asymmetric 40/60, text left, image right)
+           ══════════════════════════════════════════════ -->
+      <section id="living-room" class="project-entry" style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-24) var(--space-8);">
+        <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-12);">
+          <!-- Desktop: 50/50 layout (text left, image right) -->
+          <div style="display: none; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start;" class="project-grid-desktop">
+            <!-- Text side (50%) -->
+            <div style="padding-top: var(--space-8);">
+              <h2 data-i18n="lr-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-4) 0; text-wrap: balance; word-break: keep-all;">会客厅</h2>
+              
+              <p data-i18n="lr-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+            <!-- Image side (60%) -->
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle);">
+              <img src="../assets/image_15_g54kx7.jpg" alt="会客厅 — 岭南园林会客空间" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; opacity: 0.95; transition: opacity var(--transition-elegant); background: var(--color-bg-muted);">
+            </div>
+          </div>
+          <!-- Mobile: stacked layout -->
+          <div style="display: block;" class="project-grid-mobile">
+            <div style="overflow: hidden; border: 1px solid var(--color-border-subtle); margin-bottom: var(--space-8);">
+              <img src="../assets/image_15_g54kx7.jpg" alt="会客厅 — 岭南园林会客空间" style="width: 100%; height: auto; object-fit: contain; object-position: center; display: block; background: var(--color-bg-muted);">
+            </div>
+            <div>
+              <h2 data-i18n="lr-title" style="font-family: var(--font-cn); font-size: var(--text-2xl); font-weight: var(--weight-medium); color: var(--color-text-primary); letter-spacing: var(--tracking-tight); margin: 0 0 var(--space-3) 0; text-wrap: balance; word-break: keep-all;">会客厅</h2>
+              <span data-i18n="lr-location" style="font-family: var(--font-body); font-size: var(--text-sm); font-weight: var(--weight-light); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide); display: block; margin-bottom: var(--space-6);">广东广州</span>
+              <p data-i18n="lr-desc" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin: 0;">待补充</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Bottom CTA ── -->
+      <section style="max-width: 640px; margin: 0 auto; text-align: center; padding: var(--space-32) var(--space-8) var(--space-24);">
+        <p class="font-cn" style="font-size: var(--text-base); color: var(--color-text-secondary); line-height: var(--leading-relaxed); margin-bottom: var(--space-8);" data-i18n="projects-cta-text">了解造园过程</p>
+        <a href="philosophy.html" data-dom-id="cta-philosophy" data-i18n="nav-philosophy" class="font-cn" style="display: inline-block; font-size: var(--text-sm); font-weight: var(--weight-regular); color: var(--color-text-primary); text-decoration: none; letter-spacing: var(--tracking-wide); padding-bottom: 2px; border-bottom: 1px solid var(--color-border); transition: border-color var(--transition-base), color var(--transition-base);" onmouseover="this.style.borderBottomColor='var(--color-text-primary)'" onmouseout="this.style.borderBottomColor='var(--color-border)'">园之生长</a>
+      </section>
+
+    </div>
+
+    <!-- ── CTA: About the Designer ── -->
+    
+
+    <!-- ══════════════════════════════════════════════
+         SITE FOOTER
+         ══════════════════════════════════════════════ -->
+    <footer class="site-footer">
+      <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-20) var(--space-8) var(--space-12); border-top: 1px solid var(--color-border);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-family: var(--font-cn); font-size: var(--text-sm); font-weight: var(--weight-regular); color: var(--color-text-tertiary); letter-spacing: var(--tracking-wide);">
+            峯境园林
+          </span>
+          <span data-i18n="footer-copyright">
+            &copy; 峯境景观规划设计有限公司 版权所有
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    </main>
+
+    <!-- Inline styles for responsive grid switching and interactions -->
+    <style>
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: transparent;
+        transition: background var(--transition-elegant);
+        font-family: var(--font-cn);
+      }
+      .site-header.scrolled {
+        background: var(--color-bg);
+      }
+      .site-header .nav-link {
+        font-size: var(--text-sm);
+        font-weight: 600;
+        letter-spacing: var(--tracking-wide);
+        color: var(--color-text-primary);
+        opacity: 0.85;
+        transition: opacity var(--transition-fast);
+        position: relative;
+        padding-bottom: var(--space-1);
+      }
+      .site-header .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--color-text-primary);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform var(--transition-base);
+      }
+      .site-header .nav-link:hover {
+        opacity: 1;
+      }
+      .site-header .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+      .site-header .nav-link[data-active="true"] {
+        opacity: 1;
+      }
+      .site-header .nav-link[data-active="true"]::after {
+        transform: scaleX(1);
+      }
+      .site-footer {
+        font-family: var(--font-cn);
+        font-size: var(--text-xs);
+        color: var(--color-text-tertiary);
+      }
+      /* Bottom CTA hover */
+      a[data-dom-id="cta-philosophy"]:hover {
+        color: var(--color-text-primary);
+        border-bottom-color: var(--color-text-primary);
+      }
+      /* Responsive grid: desktop shows grid layout, mobile single column */
+      @media (min-width: 1024px) {
+        .project-grid-desktop { display: grid !important; }
+        .project-grid-mobile { display: none !important; }
+        .project-grid-desktop-alt { display: grid !important; }
+        .project-grid-mobile-alt { display: none !important; }
+      }
+      @media (max-width: 767px) {
+        .project-grid-mobile,
+        .project-grid-mobile-alt { display: none !important; }
+        .project-grid-desktop,
+        .project-grid-desktop-alt { display: grid !important; grid-template-columns: 1fr !important; }
+      }
+      /* Project image hover */
+      .project-entry img {
+        transition: opacity var(--transition-elegant), transform var(--transition-elegant);
+      }
+      .project-entry img:hover {
+        opacity: 1;
+        transform: scale(1.03);
+      }
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .site-header,
+        .site-header .nav-link,
+        .site-header .nav-link::after,
+        a[data-dom-id="cta-philosophy"],
+        .project-entry img {
+          transition-duration: 0.01ms;
+        }
+      }
+      @media (max-width: 767px) {
+        body { font-size: 14px; }
+        [style*="font-size: 20px"] { font-size: 17px !important; }
+        [style*="font-size: var(--text-2xl)"] { font-size: var(--text-xl) !important; }
+        [style*="font-size: var(--text-3xl)"] { font-size: var(--text-2xl) !important; }
+        [style*="font-size: var(--text-4xl)"] { font-size: var(--text-3xl) !important; }
+      }
+    </style>
+    <script>
+    (function () {
+      var header = document.getElementById('site-header');
+      if (!header) return;
+      var toggle = document.getElementById('mobile-menu-toggle');
+      var mobileMenu = document.getElementById('mobile-menu');
+
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 20) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      if (toggle && mobileMenu) {
+        toggle.addEventListener('click', function () {
+          var isOpen = mobileMenu.style.display === 'block';
+          mobileMenu.style.display = isOpen ? 'none' : 'block';
+          toggle.setAttribute('aria-expanded', String(!isOpen));
+        });
+      }
+
+      function checkMobile() {
+        if (toggle && mobileMenu) {
+          var isMobile = window.innerWidth < 768;
+          toggle.style.display = isMobile ? 'block' : 'none';
+          if (!isMobile) {
+            mobileMenu.style.display = 'none';
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        }
+      }
+      window.addEventListener('resize', checkMobile);
+      checkMobile();
+    })();
+    </script>
+    <script>lucide.createIcons();</script>
+    <script src="../assets/i18n.js"></script>
+    <script src="../assets/router.js"></script>
+</body>
+</html>
