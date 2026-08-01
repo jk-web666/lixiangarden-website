@@ -1,4 +1,4 @@
-﻿var I18N = (function () {
+var I18N = (function () {
   var translations = {
     'zh-CN': {
       'nav-home': '首页',
@@ -82,7 +82,8 @@
       'featured-desc': '岭南山地园林之典范，因山就势，博古烁今。五叠岭下，万亩荔林相拥，藏一方传世之园。',
       'philosophy-teaser-tag': '造园过程',
       'philosophy-teaser-title': '一座园子，不是建成的，是长成的',
-      'philosophy-teaser-desc': '从第一铲土落下，到枝叶交叠成荫，时间在这里缓慢地做着它自己的事。石头住下来，苔藓爬上来，树木学会了风的语言。'
+      'philosophy-teaser-desc': '从第一铲土落下，到枝叶交叠成荫，时间在这里缓慢地做着它自己的事。石头住下来，苔藓爬上来，树木学会了风的语言。',
+      'mobile-lang-label': '语言'
     },
     'zh-TW': {
       'nav-home': '首頁',
@@ -166,7 +167,8 @@
       'featured-desc': '嶺南山地園林之典範，因山就勢，博古爍今。五疊嶺下，萬畝荔林相擁，藏一方傳世之園。',
       'philosophy-teaser-tag': '造園過程',
       'philosophy-teaser-title': '一座園子，不是建成的，是長成的',
-      'philosophy-teaser-desc': '從第一剷土落下，到枝葉交疊成蔭，時間在這裡緩慢地做著它自己的事。石頭住下來，苔蘚爬上來，樹木學會了風的語言。'
+      'philosophy-teaser-desc': '從第一剷土落下，到枝葉交疊成蔭，時間在這裡緩慢地做著它自己的事。石頭住下來，苔蘚爬上來，樹木學會了風的語言。',
+      'mobile-lang-label': '語言'
     },
     'en': {
       'nav-home': 'Home',
@@ -250,7 +252,8 @@
       'featured-desc': 'A masterpiece of Lingnan mountain garden design — built to the land’s contours, ancient wisdom made new. Beneath the Five-Ridge Mountains, embraced by ten thousand mu of lychee forests, a timeless garden is hidden.',
       'philosophy-teaser-tag': 'Garden Making',
       'philosophy-teaser-title': 'A garden is not built — it grows',
-      'philosophy-teaser-desc': 'From the first shovel of earth to the canopy of interwoven branches, time works its quiet magic here. Stones settle in, moss creeps up, trees learn the language of wind.'
+      'philosophy-teaser-desc': 'From the first shovel of earth to the canopy of interwoven branches, time works its quiet magic here. Stones settle in, moss creeps up, trees learn the language of wind.',
+      'mobile-lang-label': 'Language'
     }
   };
 

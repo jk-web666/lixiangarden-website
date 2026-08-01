@@ -80,7 +80,7 @@
         <div style="display: flex; align-items: center; justify-content: space-between;">
           <a href="index.html" class="header-logo" data-i18n="brand-name" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-regular); color: var(--color-text-primary); text-decoration: none; letter-spacing: var(--tracking-wide);">峯境园林</a>
 
-          <nav style="display: flex; align-items: center; gap: var(--space-8);">
+          <nav class="main-nav" style="display: flex; align-items: center; gap: var(--space-8);">
             <a href="index.html" class="nav-link" data-nav-key="index" data-i18n="nav-home">首页</a>
             <a href="projects.html" class="nav-link" data-nav-key="projects" data-i18n="nav-projects">漫游此园</a>
             <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-i18n="nav-philosophy">园之生长</a>
@@ -105,6 +105,14 @@
           <a href="philosophy.html" class="nav-link" data-nav-key="philosophy" data-i18n="nav-philosophy">园之生长</a>
           <a href="about.html" class="nav-link" data-nav-key="about" data-active="true" data-i18n="nav-about">关于我们</a>
         </nav>
+        <div class="mobile-lang-selector" style="display: flex; gap: var(--space-3); margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--color-border-subtle); align-items: center;">
+          <span style="font-family: var(--font-cn); font-size: var(--text-sm); color: var(--color-text-secondary); opacity: 0.7; letter-spacing: var(--tracking-wide);" data-i18n="mobile-lang-label">语言</span>
+          <div style="display: flex; gap: var(--space-2); margin-left: var(--space-4);">
+            <button class="lang-option mobile-lang-option active" data-lang="zh-CN" onclick="I18N.setLang('zh-CN')" style="background: none; border: 1px solid var(--color-border); border-radius: 4px; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-primary); cursor: pointer; padding: 4px 12px; opacity: 1; letter-spacing: 0.04em;">简</button>
+            <button class="lang-option mobile-lang-option" data-lang="zh-TW" onclick="I18N.setLang('zh-TW')" style="background: none; border: 1px solid var(--color-border); border-radius: 4px; font-family: var(--font-body); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 4px 12px; opacity: 0.6; letter-spacing: 0.04em;">繁</button>
+            <button class="lang-option mobile-lang-option" data-lang="en" onclick="I18N.setLang('en')" style="background: none; border: 1px solid var(--color-border); border-radius: 4px; font-family: var(--font-display); font-size: var(--text-sm); font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 4px 12px; opacity: 0.6; letter-spacing: 0.04em;">EN</button>
+          </div>
+        </div>
       </div>
     </header>
 
