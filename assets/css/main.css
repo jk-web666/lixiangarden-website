@@ -657,42 +657,49 @@ body {
   .site-header #mobile-menu-toggle {
     display: block !important;
   }
-  .site-header:not(.scrolled):not(.header-light) #mobile-menu {
-    background: rgba(13, 11, 9, 0.92);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+
+  /* 移动端：首页header也加浅色背景，保证logo和汉堡按钮可见 */
+  .site-header:not(.scrolled):not(.header-light) {
+    background: var(--color-bg) !important;
   }
-  .site-header.scrolled #mobile-menu,
-  .site-header.header-light #mobile-menu {
-    background: var(--color-bg);
+  .site-header:not(.scrolled):not(.header-light) .header-logo {
+    color: var(--color-text-primary) !important;
+  }
+  .site-header:not(.scrolled):not(.header-light) #mobile-menu-toggle {
+    color: var(--color-text-primary) !important;
+  }
+
+  /* 移动端菜单统一用浅色背景，不再漆黑一片 */
+  .site-header #mobile-menu {
+    background: var(--color-bg) !important;
   }
   .site-header #mobile-menu .nav-link {
     font-size: var(--text-base);
     padding: var(--space-2) 0;
     width: 100%;
     white-space: nowrap;
+    color: var(--color-text-primary) !important;
+    opacity: 0.85;
   }
+  .site-header #mobile-menu .nav-link::after {
+    background: var(--color-text-primary) !important;
+  }
+
   .mobile-lang-selector .mobile-lang-option {
     min-width: 40px;
   }
-  /* 移动端菜单里的语言按钮：active状态必须覆盖内联style的opacity/color */
   .mobile-lang-selector .mobile-lang-option.active {
     opacity: 1 !important;
     color: var(--color-text-primary) !important;
     border-color: var(--color-border-strong) !important;
     background: var(--color-bg-subtle);
   }
-  .site-header:not(.scrolled):not(.header-light) .mobile-lang-selector .mobile-lang-option {
-    color: var(--color-text-inverse) !important;
-    border-color: rgba(247,244,240,0.35) !important;
+  .mobile-lang-selector .mobile-lang-option {
+    color: var(--color-text-secondary) !important;
+    border-color: var(--color-border) !important;
   }
-  .site-header:not(.scrolled):not(.header-light) .mobile-lang-selector .mobile-lang-option.active {
-    color: var(--color-text-inverse) !important;
-    border-color: rgba(247,244,240,0.9) !important;
-    background: rgba(247,244,240,0.15);
-  }
-  .site-header:not(.scrolled):not(.header-light) .mobile-lang-selector span {
-    color: var(--color-text-inverse) !important;
+  .mobile-lang-selector span {
+    color: var(--color-text-secondary) !important;
   }
 }
 
@@ -714,12 +721,14 @@ body {
   .swiper-slide img { max-height: 280px; }
 
   /* 移动端：强制所有两列grid降为单列，避免左右挤压导致横竖错乱 */
+  .featured-teaser,
   [style*="grid-template-columns:"][style*="1fr 1fr"],
   [style*="grid-template-columns:"][style*="3fr 2fr"],
   [style*="grid-template-columns:"][style*="2fr 3fr"] {
     grid-template-columns: 1fr !important;
     gap: var(--space-8) !important;
   }
+  .featured-teaser > [style*="order"],
   [style*="order: 1"], [style*="order: 2"] { order: initial !important; }
 
   /* 避免white-space:nowrap在移动端造成横向溢出 */
