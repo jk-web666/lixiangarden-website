@@ -624,6 +624,8 @@ body {
 /* =====================================================
    Responsive
    ===================================================== */
+
+/* --- 1024px以下：显示/隐藏 桌面/移动 网格 --- */
 @media (max-width: 1024px) {
   .project-grid-desktop,
   .project-grid-desktop-alt {
@@ -645,133 +647,140 @@ body {
   }
 }
 
+/* --- 1024px以下：导航 / 移动端菜单可见性（独立媒体查询，避免被其他规则牵连） --- */
 @media (max-width: 1024px) {
   .site-header > div {
-    padding-left: var(--space-6) !important;
-    padding-right: var(--space-6) !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
   }
   .site-header .header-logo {
-    font-size: var(--text-base) !important;
-    letter-spacing: var(--tracking-wide) !important;
+    font-size: 17px !important;
+    letter-spacing: 0.08em !important;
   }
-  .site-header #mobile-menu-toggle {
+  #mobile-menu-toggle {
     display: block !important;
   }
-
-  /* 移动端：首页header也加浅色背景，保证logo和汉堡按钮可见 */
-  .site-header:not(.scrolled):not(.header-light) {
-    background: var(--color-bg) !important;
+  /* 未滚动时也给header加背景色，保证logo和汉堡按钮不消失 */
+  .site-header {
+    background: #f7f4f0 !important;
   }
-  .site-header:not(.scrolled):not(.header-light) .header-logo {
-    color: var(--color-text-primary) !important;
+  .site-header .header-logo {
+    color: #1a1714 !important;
   }
-  .site-header:not(.scrolled):not(.header-light) #mobile-menu-toggle {
-    color: var(--color-text-primary) !important;
+  #mobile-menu-toggle {
+    color: #1a1714 !important;
   }
-
-  /* 移动端菜单统一用浅色背景，不再漆黑一片 */
-  .site-header #mobile-menu {
-    background: var(--color-bg) !important;
+  /* 移动端菜单用浅色背景 */
+  #mobile-menu {
+    background: #f7f4f0 !important;
   }
-  .site-header #mobile-menu .nav-link {
-    font-size: var(--text-base);
-    padding: var(--space-2) 0;
-    width: 100%;
-    white-space: nowrap;
-    color: var(--color-text-primary) !important;
-    opacity: 0.85;
+  #mobile-menu .nav-link {
+    font-size: 17px !important;
+    padding: 8px 0 !important;
+    width: 100% !important;
+    white-space: nowrap !important;
+    color: #1a1714 !important;
+    opacity: 0.85 !important;
   }
-  .site-header #mobile-menu .nav-link::after {
-    background: var(--color-text-primary) !important;
+  #mobile-menu .nav-link::after {
+    background: #1a1714 !important;
   }
-
+  /* 移动端语言按钮 */
   .mobile-lang-selector .mobile-lang-option {
     min-width: 40px;
   }
   .mobile-lang-selector .mobile-lang-option.active {
     opacity: 1 !important;
-    color: var(--color-text-primary) !important;
-    border-color: var(--color-border-strong) !important;
-    background: var(--color-bg-subtle);
+    color: #1a1714 !important;
+    border-color: #a39889 !important;
+    background: #f0ebe4 !important;
   }
   .mobile-lang-selector .mobile-lang-option {
-    color: var(--color-text-secondary) !important;
-    border-color: var(--color-border) !important;
+    color: #5c544b !important;
+    border-color: #d9d2c7 !important;
   }
   .mobile-lang-selector span {
-    color: var(--color-text-secondary) !important;
+    color: #5c544b !important;
   }
+  /* scrolled 后的颜色覆盖（统一用浅色文字） */
+  .site-header.scrolled .header-logo { color: #1a1714 !important; }
+  .site-header.scrolled #mobile-menu-toggle { color: #1a1714 !important; }
+  .site-header.scrolled .lang-option { color: #5c544b !important; }
+  .site-header.scrolled .lang-option.active { color: #1a1714 !important; }
 }
 
+/* --- 767px以下：Hero / 基础字号 （独立媒体查询1） --- */
 @media (max-width: 767px) {
   .hero-fullscreen { min-height: 500px; }
-  .hero-fullscreen .hero-content { padding: var(--space-6) var(--space-6); }
-  .hero-fullscreen .hero-brand { font-size: clamp(1.875rem, 9vw, 3rem); letter-spacing: 0.1em; }
-  .hero-fullscreen .hero-tagline { font-size: var(--text-sm); line-height: 1.9; letter-spacing: 0.04em; }
+  .hero-fullscreen .hero-content { padding: 24px; }
+  .hero-fullscreen .hero-brand { font-size: 32px; letter-spacing: 0.1em; }
+  .hero-fullscreen .hero-tagline { font-size: 14px; line-height: 1.9; letter-spacing: 0.04em; }
   .hero-fullscreen .hero-tagline br { display: none; }
-  .page-banner { height: 180px; margin: 0 calc(-1 * var(--space-6)); }
-  .page-banner h1 { font-size: var(--text-2xl); }
-  .page-banner p { font-size: var(--text-sm); margin-top: var(--space-4); }
+  .page-banner { height: 180px; margin: 0 -24px; }
+  .page-banner h1 { font-size: 32px; }
+  .page-banner p { font-size: 14px; margin-top: 16px; }
   body { font-size: 14px; }
-  [style*="font-size: 20px"] { font-size: 17px !important; }
-  [style*="font-size: var(--text-xl)"] { font-size: var(--text-base) !important; }
-  [style*="font-size: var(--text-2xl)"] { font-size: var(--text-xl) !important; }
-  [style*="font-size: var(--text-3xl)"] { font-size: var(--text-2xl) !important; }
-  [style*="font-size: var(--text-4xl)"] { font-size: var(--text-3xl) !important; }
   .swiper-slide img { max-height: 280px; }
+}
 
-  /* 移动端：强制所有grid容器降为单列布局 */
+/* --- 767px以下：首页两板块强制单列 （独立媒体查询2 - 核心修复） --- */
+@media (max-width: 767px) {
   .home-featured,
-  .featured-teaser,
-  div[style*="grid-template-columns"] {
+  .philosophy-featured,
+  .featured-teaser {
+    display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: var(--space-8) !important;
+    grid-template-rows: auto !important;
+    grid-auto-flow: row !important;
+    gap: 32px !important;
   }
+  /* 重置第二个板块的 order:2 */
+  .philosophy-featured > div,
   .home-featured > div,
-  .featured-teaser > div,
-  div[style*="grid-template-columns"] > div {
+  .featured-teaser > div {
     order: initial !important;
   }
+  /* 同时设置父 section 的 padding 不要挤 */
+  #featured { padding: 64px 24px !important; }
+  .philosophy-featured { padding-left: 0 !important; padding-right: 0 !important; }
+}
 
-  /* 避免white-space:nowrap在移动端造成横向溢出 */
-  [style*="white-space: nowrap"] {
-    white-space: normal !important;
-  }
-
-  .craft-section { padding-bottom: var(--space-16); margin-bottom: var(--space-8); }
-  .craft-title { font-size: var(--text-xl); padding: var(--space-3) var(--space-8); letter-spacing: 0.12em; }
-  .craft-desc { font-size: var(--text-base) !important; line-height: 2; max-width: 100%; padding: 0 var(--space-2); }
+/* --- 767px以下：工艺/园之生长页字号与内边距 （独立媒体查询3） --- */
+@media (max-width: 767px) {
+  .craft-section { padding-bottom: 64px; margin-bottom: 32px; }
+  .craft-title { font-size: 24px; padding: 12px 32px; letter-spacing: 0.12em; }
+  .craft-desc { font-size: 17px !important; line-height: 2; max-width: 100%; padding: 0 8px; }
 
   .page-banner + section,
   #page-content > section,
   .hairline-divider + section,
   .hairline-divider + div {
-    padding-left: var(--space-6) !important;
-    padding-right: var(--space-6) !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
   }
-  .contact-section { padding-left: var(--space-6) !important; padding-right: var(--space-6) !important; }
-  .contact-section a { font-size: var(--text-xl) !important; }
-  .site-footer > div { padding-left: var(--space-6) !important; padding-right: var(--space-6) !important; }
+  .contact-section { padding-left: 24px !important; padding-right: 24px !important; }
+  .contact-section a { font-size: 24px !important; }
+  .site-footer > div { padding-left: 24px !important; padding-right: 24px !important; }
 
-  /* 漫游此园首屏大图的浮动标题：移动端缩小内边距和字号 */
-  [id^="project-"] > div > div[style*="position: absolute"] {
-    padding: var(--space-6) var(--space-6) var(--space-5) !important;
+  /* 漫游此园首屏浮动标题 */
+  .project-hero-caption {
+    padding: 24px 24px 20px !important;
   }
-  [id^="project-"] > div > div[style*="position: absolute"] h2 {
-    font-size: var(--text-xl) !important;
+  .project-hero-caption h2 {
+    font-size: 24px !important;
   }
-  [id^="project-"] > div img[style*="max-height"] {
+  .project-hero-image {
     max-height: 60vh !important;
   }
 
-  /* 章节标题外框：移动端减小内边距 */
+  /* 章节标题外框 */
   .section-title-outdoor-inner,
   .section-title-indoor-inner {
-    padding: var(--space-5) var(--space-5) !important;
+    padding: 20px !important;
   }
   .section-title-outdoor h3,
   .section-title-indoor h3 {
-    font-size: var(--text-xl) !important;
+    font-size: 24px !important;
     letter-spacing: 0.1em !important;
   }
 }
