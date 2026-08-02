@@ -720,16 +720,18 @@ body {
   [style*="font-size: var(--text-4xl)"] { font-size: var(--text-3xl) !important; }
   .swiper-slide img { max-height: 280px; }
 
-  /* 移动端：强制所有两列grid降为单列，避免左右挤压导致横竖错乱 */
+  /* 移动端：强制所有grid容器降为单列布局 */
+  .home-featured,
   .featured-teaser,
-  [style*="grid-template-columns:"][style*="1fr 1fr"],
-  [style*="grid-template-columns:"][style*="3fr 2fr"],
-  [style*="grid-template-columns:"][style*="2fr 3fr"] {
+  div[style*="grid-template-columns"] {
     grid-template-columns: 1fr !important;
     gap: var(--space-8) !important;
   }
-  .featured-teaser > [style*="order"],
-  [style*="order: 1"], [style*="order: 2"] { order: initial !important; }
+  .home-featured > div,
+  .featured-teaser > div,
+  div[style*="grid-template-columns"] > div {
+    order: initial !important;
+  }
 
   /* 避免white-space:nowrap在移动端造成横向溢出 */
   [style*="white-space: nowrap"] {
