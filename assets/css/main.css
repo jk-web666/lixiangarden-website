@@ -792,3 +792,154 @@ body {
   .featured-teaser .teaser-link::after { transition: none; }
   .fade-in { transition: none; }
 }
+
+/* =====================================================
+   FINAL FALLBACK (末尾) — 小米13兼容性兜底
+   用ID选择器 + 最粗暴的!important，
+   确保任何解析失败的@media块都不会让关键样式失效
+   ===================================================== */
+
+/* --- 任何 ≤1024px 时：汉堡按钮绝对可见 --- */
+@media (max-width: 1024px) {
+  #mobile-menu-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    background: #1a1714 !important;
+    border: 1px solid #1a1714 !important;
+    border-radius: 6px !important;
+    color: #f7f4f0 !important;
+    padding: 10px 12px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 99999 !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+  }
+  #mobile-menu-toggle i,
+  #mobile-menu-toggle svg,
+  #mobile-menu-toggle [data-lucide] {
+    width: 24px !important;
+    height: 24px !important;
+    stroke: #f7f4f0 !important;
+    fill: none !important;
+    stroke-width: 2 !important;
+    display: inline-block !important;
+  }
+  /* header背景和logo颜色 */
+  header.site-header,
+  #site-header {
+    background: #f7f4f0 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+  }
+  a.header-logo {
+    color: #1a1714 !important;
+  }
+  /* 展开菜单背景文字 */
+  div#mobile-menu {
+    background: #f7f4f0 !important;
+    border-top: 1px solid #d9d2c7 !important;
+    padding: 24px 24px 32px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    display: none;
+  }
+  div#mobile-menu[style*="display: block"],
+  div#mobile-menu.show {
+    display: block !important;
+  }
+  div#mobile-menu a.nav-link {
+    font-size: 17px !important;
+    padding: 10px 0 !important;
+    color: #1a1714 !important;
+    opacity: 0.9 !important;
+    letter-spacing: 0.08em !important;
+    display: block !important;
+    width: 100% !important;
+    white-space: normal !important;
+    box-sizing: border-box !important;
+  }
+  div#mobile-menu a.nav-link::after {
+    background: #1a1714 !important;
+  }
+  .mobile-lang-selector span { color: #5c544b !important; }
+  .mobile-lang-selector .mobile-lang-option {
+    min-width: 40px;
+    color: #5c544b !important;
+    border-color: #d9d2c7 !important;
+  }
+  .mobile-lang-selector .mobile-lang-option.active {
+    opacity: 1 !important;
+    color: #1a1714 !important;
+    border-color: #a39889 !important;
+    background: #f0ebe4 !important;
+  }
+}
+
+/* --- 任何 ≤767px 时：首页两板块绝对单列 --- */
+@media (max-width: 767px) {
+  #homeFeatured > div,
+  #homeFeatured .featured-teaser,
+  #homeFeatured .home-featured {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    grid-auto-flow: row !important;
+    gap: 32px !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  #homeFeatured > div > div,
+  #homeFeatured .featured-teaser > div {
+    width: 100% !important;
+    order: initial !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+  #homeFeatured,
+  #homePhilosophy {
+    padding: 64px 24px !important;
+  }
+  #homePhilosophy .featured-teaser,
+  #homePhilosophy .philosophy-featured,
+  #homePhilosophy > div > div {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    grid-auto-flow: row !important;
+    gap: 32px !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  #homePhilosophy .featured-teaser > div,
+  #homePhilosophy .philosophy-featured > div {
+    order: initial !important;
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+  /* 漫游此园引言不横向溢出：双重保险 */
+  #page-content p[data-i18n*="projects-lixian-quote"],
+  #page-content p[data-i18n="projects-lixian-quote"],
+  #project-1 p {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+  #project-1 > div {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
