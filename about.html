@@ -4,8 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>关于我们 — 峯境园林</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preload" as="image" href="assets/images/image_0_2gus5p.webp">
   <link rel="stylesheet" href="assets/css/main.css">
-  <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap">
+  <script>window.lucide={createIcons:function(){}};</script>
   <style>
     .site-header { background: var(--color-bg); }
     .site-header .nav-link { color: var(--color-text-primary); opacity: 0.85; }
@@ -75,7 +79,7 @@
 <body class="min-h-screen font-cn antialiased">
   <main>
     <!-- SITE HEADER -->
-    <header class="site-header" id="site-header">
+    <header class="site-header header-solid" id="site-header">
       <div style="max-width: var(--max-width-page); margin: 0 auto; padding: var(--space-6) var(--space-8);">
         <div style="display: flex; align-items: center; justify-content: space-between;">
           <a href="index.html" class="header-logo" data-i18n="brand-name" style="font-family: var(--font-cn); font-size: var(--text-lg); font-weight: var(--weight-regular); color: var(--color-text-primary); text-decoration: none; letter-spacing: var(--tracking-wide);">峯境园林</a>
@@ -93,7 +97,7 @@
           </nav>
 
           <button id="mobile-menu-toggle" aria-label="菜单" aria-expanded="false" style="display:none; background:#1a1714; border:1px solid #1a1714; border-radius:6px; cursor:pointer; color:#f7f4f0; padding:10px 12px; width:44px; height:44px; box-sizing:border-box; position:relative; z-index:9999; flex-shrink:0;">
-            <i data-lucide="menu" style="width: 24px; height: 24px;"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
         </div>
       </div>
@@ -120,7 +124,7 @@
     <div id="page-content" class="min-h-screen" style="padding-top: var(--space-20);">
       <!-- Page Title Banner -->
       <section class="page-banner">
-        <img src="assets/images/image_0_2gus5p.png" alt="" aria-hidden="true">
+        <img src="assets/images/image_0_2gus5p.webp" alt="" aria-hidden="true">
         <div class="banner-content fade-in">
           <h1 data-i18n="nav-about">关于我们</h1>
         </div>
@@ -129,14 +133,14 @@
       <!-- Designer Portrait -->
       <section class="fade-in" style="max-width: var(--max-width-content); margin: 0 auto; padding: var(--space-32) var(--space-8) 0;">
         <div class="designer-portrait">
-          <img src="assets/images/image_41_5tuob8.jpg" alt="设计师云山肖像">
+          <img src="assets/images/image_41_5tuob8.webp" alt="设计师云山肖像">
         </div>
       </section>
 
       <!-- Biographical Text -->
       <section class="fade-in" style="max-width: 640px; margin: 0 auto; padding: var(--space-16) var(--space-8) var(--space-24);">
         <h1 data-i18n="about-heading" style="font-family: var(--font-cn); font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: var(--weight-regular); line-height: var(--leading-snug); letter-spacing: var(--tracking-wide); color: var(--color-text-primary); text-align: center; text-wrap: balance; word-break: keep-all; overflow-wrap: break-word;">李华根</h1>
-        <p style="font-family: var(--font-cn); font-size: var(--text-xs); font-weight: var(--weight-light); letter-spacing: var(--tracking-wider); color: var(--color-text-tertiary); text-align: center; margin: var(--space-3) 0 0;" data-i18n="designer-tag">园林设计师</p>
+        <p style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); letter-spacing: var(--tracking-wider); color: var(--color-text-tertiary); text-align: center; margin: var(--space-3) 0 0;" data-i18n="designer-tag">园林设计师</p>
         <p data-i18n="about-years-text" style="font-family: var(--font-cn); font-size: var(--text-base); font-weight: var(--weight-light); line-height: var(--leading-relaxed); color: var(--color-text-secondary); text-align: center; margin-top: var(--space-6); letter-spacing: var(--tracking-wide);">
           二十八年潜心于中国古典岭南园林之研究与营造
         </p>
@@ -221,8 +225,7 @@
     </footer>
   </main>
 
-  <script>lucide.createIcons();</script>
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/i18n.js?v=2"></script>
 </body>
 </html>

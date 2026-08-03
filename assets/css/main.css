@@ -3,7 +3,7 @@
    Tone: Luxury/refined editorial, museum-like stillness
    ===================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+/* Fonts moved to HTML <head> for parallel loading */
 
 :root {
   --color-primary: #1a1714;
@@ -181,6 +181,22 @@ body {
 .site-header.scrolled {
   background: var(--color-bg);
   box-shadow: var(--shadow-subtle);
+}
+
+.site-header.header-solid {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-subtle);
+}
+.site-header.header-solid .nav-link { color: var(--color-text-primary); }
+.site-header.header-solid .nav-link::after { background: var(--color-text-primary); }
+.site-header.header-solid .header-logo { color: var(--color-text-primary) !important; }
+.site-header.header-solid .lang-option {
+  color: var(--color-text-secondary) !important;
+  opacity: 0.6;
+}
+.site-header.header-solid .lang-option.active {
+  color: var(--color-text-primary) !important;
+  opacity: 1 !important;
 }
 
 .site-header .nav-link {
@@ -649,6 +665,10 @@ body {
   .project-grid-mobile,
   .project-grid-mobile-alt {
     display: none !important;
+  }
+  .project-grid-desktop p,
+  .project-grid-desktop-alt p {
+    font-size: var(--text-lg) !important;
   }
 }
 
