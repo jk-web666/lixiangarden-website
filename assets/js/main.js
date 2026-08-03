@@ -207,25 +207,10 @@
       for (var k = 0; k < secs.length; k++) {
         secs[k].style.setProperty('padding', '64px 24px', 'important');
       }
-    } else {
-      // 大屏清空JS强制改的内联，让桌面CSS重新接管
-      var bigTeasers = document.querySelectorAll(
-        '#homeFeatured > div, #homeFeatured .featured-teaser,' +
-        '#homePhilosophy .featured-teaser, #homePhilosophy > div > div,' +
-        '#homeFeatured > div > div, #homePhilosophy .featured-teaser > div,' +
-        '#homeFeatured, #homePhilosophy'
-      );
-      for (var m = 0; m < bigTeasers.length; m++) {
-        bigTeasers[m].style.removeProperty('display');
-        bigTeasers[m].style.removeProperty('grid-template-columns');
-        bigTeasers[m].style.removeProperty('grid-template-rows');
-        bigTeasers[m].style.removeProperty('grid-auto-flow');
-        bigTeasers[m].style.removeProperty('gap');
-        bigTeasers[m].style.removeProperty('order');
-        bigTeasers[m].style.removeProperty('width');
-        bigTeasers[m].style.removeProperty('padding');
-      }
     }
+    // 注意：大屏(>767px)时不要清除任何内联样式，
+    // HTML中原本的 grid-template-columns:1fr 1fr 等内联样式定义了桌面端双列布局，
+    // 清除它们会导致桌面端变成单列全屏。
 
     // 3) 漫游此园引言 —— 任何尺寸都强制换行、不横溢
     var quotes = document.querySelectorAll(
