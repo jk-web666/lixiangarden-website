@@ -202,6 +202,27 @@
       for (var j = 0; j < inner.length; j++) {
         inner[j].style.setProperty('order', 'initial', 'important');
         inner[j].style.setProperty('width', '100%', 'important');
+        inner[j].style.setProperty('padding-right', '8px', 'important');
+      }
+      // h2标题：允许中文换行 + 缩小字号，防止溢出
+      var h2s = document.querySelectorAll(
+        '#homeFeatured h2, #homePhilosophy h2, .featured-teaser h2'
+      );
+      for (var h = 0; h < h2s.length; h++) {
+        h2s[h].style.setProperty('font-size', '24px', 'important');
+        h2s[h].style.setProperty('word-break', 'break-word', 'important');
+        h2s[h].style.setProperty('overflow-wrap', 'break-word', 'important');
+        h2s[h].style.setProperty('white-space', 'normal', 'important');
+        h2s[h].style.setProperty('max-width', '100%', 'important');
+      }
+      // p描述：允许中文换行
+      var ps = document.querySelectorAll(
+        '#homeFeatured p, #homePhilosophy p, .featured-teaser p'
+      );
+      for (var p = 0; p < ps.length; p++) {
+        ps[p].style.setProperty('word-break', 'break-word', 'important');
+        ps[p].style.setProperty('overflow-wrap', 'break-word', 'important');
+        ps[p].style.setProperty('max-width', '100%', 'important');
       }
       var secs = document.querySelectorAll('#homeFeatured, #homePhilosophy');
       for (var k = 0; k < secs.length; k++) {

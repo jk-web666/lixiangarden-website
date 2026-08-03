@@ -184,7 +184,7 @@ body {
 }
 
 .site-header .nav-link {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 600;
   letter-spacing: var(--tracking-wide);
   color: var(--color-text-inverse);
@@ -738,16 +738,36 @@ body {
     grid-template-rows: auto !important;
     grid-auto-flow: row !important;
     gap: 32px !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
   }
-  /* 重置第二个板块的 order:2 */
+  /* 重置order + min-width:0 防止内容撑开grid列 */
   .philosophy-featured > div,
   .home-featured > div,
   .featured-teaser > div {
     order: initial !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
   }
-  /* 同时设置父 section 的 padding 不要挤 */
-  #featured { padding: 64px 24px !important; }
-  .philosophy-featured { padding-left: 0 !important; padding-right: 0 !important; }
+  /* 首页h2标题允许中文换行，缩小字号防止溢出 */
+  .home-featured h2,
+  .philosophy-featured h2,
+  .featured-teaser h2 {
+    font-size: 24px !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+  }
+  /* 首页板块文字描述也允许换行 */
+  .home-featured p,
+  .philosophy-featured p,
+  .featured-teaser p {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+  }
 }
 
 /* --- 767px以下：工艺/园之生长页字号与内边距 （独立媒体查询3） --- */
@@ -904,6 +924,21 @@ body {
     order: initial !important;
     display: block !important;
     box-sizing: border-box !important;
+    padding-right: 8px !important;
+  }
+  #homeFeatured .featured-teaser > div h2,
+  #homeFeatured .home-featured > div h2 {
+    font-size: 24px !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+  }
+  #homeFeatured .featured-teaser > div p,
+  #homeFeatured .home-featured > div p {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
   }
   #homeFeatured,
   #homePhilosophy {
@@ -927,6 +962,21 @@ body {
     width: 100% !important;
     display: block !important;
     box-sizing: border-box !important;
+    padding-right: 8px !important;
+  }
+  #homePhilosophy .featured-teaser > div h2,
+  #homePhilosophy .philosophy-featured > div h2 {
+    font-size: 24px !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+  }
+  #homePhilosophy .featured-teaser > div p,
+  #homePhilosophy .philosophy-featured > div p {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
   }
   /* 漫游此园引言不横向溢出：双重保险 */
   #page-content p[data-i18n*="projects-lixian-quote"],
